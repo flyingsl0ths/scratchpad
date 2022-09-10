@@ -1,9 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 pkgs.mkShell {
   nativeBuildInputs = (with pkgs; [
-    nodejs
-    nodePackages.prettier
-
+    nodejs-18_x
     nixpkgs-fmt
   ]);
   # Optional

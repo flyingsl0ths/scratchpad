@@ -1,0 +1,17 @@
+@mixin titlebar {
+  background-color: #e6e9ed;
+  border-radius: 4px 4px 0 0;
+  padding: 0.25vh 0.5vw;
+  height: 100%;
+  width: 100%;
+}
+
+.left-title-bar {
+  @include titlebar;
+  justify-content: flex-start;
+}
+
+.right-title-bar {
+  @include titlebar;
+  justify-content: flex-end;
+}

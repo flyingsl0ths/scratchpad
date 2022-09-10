@@ -1,12 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Button from "@mui/material/Button";
+import ScreenshotMonitor from "@mui/icons-material/ScreenshotMonitor";
+
+import { VBox } from "./components/Containers";
+import CodeWindow from "./components/CodeWindow";
+import Spacer from "./components/Spacer";
+import SettingsTabs from "./components/tabs";
+
 import "./css/index.css";
 
-function App(props) {
+function App() {
   return (
-    <div>
-      <h2>Hello World!!</h2>
-    </div>
+    <VBox centered={true}>
+      <h1 id="header">Scratchpad</h1>
+
+      <CodeWindow />
+
+      <Spacer amount={"2em"} />
+
+      <Button variant="contained" startIcon={<ScreenshotMonitor />}>
+        Screenshot
+      </Button>
+
+      <Spacer amount={"2em"} />
+
+      <SettingsTabs />
+    </VBox>
   );
 }
 
