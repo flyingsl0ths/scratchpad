@@ -16,7 +16,7 @@ export default class Screenshot extends React.Component {
     super(props);
     this.state = {
       containsNoFileName: false,
-      fileExtension: "jpeg"
+      fileExtension: Screenshot.FILE_EXTENSIONS[0]
     };
   }
 
@@ -63,7 +63,7 @@ export default class Screenshot extends React.Component {
           <Spacer amount="0.5em" />
 
           <Selection
-            defaultValue={2}
+            defaultValue={1}
             label="File extension"
             values={Screenshot.FILE_EXTENSIONS}
             onSelectionChanged={this.handleFileExtensionChanged}
