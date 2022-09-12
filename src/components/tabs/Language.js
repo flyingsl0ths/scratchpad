@@ -1,10 +1,16 @@
 import React from "react";
 import DataObjectIcon from "@mui/icons-material/DataObject";
+import PropTypes from "prop-types";
 
 import { VBox } from "../Containers";
 import { ButtonList } from "../list";
 import LabeledIcon from "../LabeledIcon";
 import Spacer from "../Spacer";
+
+LanguageTab.propTypes = {
+  selectedLanguage: PropTypes.string.isRequired,
+  handleLanguageChange: PropTypes.func.isRequired
+};
 
 export default function LanguageTab(props) {
   return (
@@ -15,16 +21,18 @@ export default function LanguageTab(props) {
       <Spacer amount="0.5em" />
       <ButtonList
         orientation="v"
+        selected={props.selectedLanguage}
+        handleOnClick={props.handleLanguageChange}
         labels={[
-          "C",
-          "C++",
-          "Python",
-          "Javascript",
-          "Typescript",
-          "Lua",
-          "Haskell",
-          "Java",
-          "Kotlin"
+          "c",
+          "c++",
+          "python",
+          "javascript",
+          "typescript",
+          "lua",
+          "haskell",
+          "java",
+          "kotlin"
         ]}
       />
     </VBox>

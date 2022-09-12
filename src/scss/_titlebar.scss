@@ -6,12 +6,12 @@
   width: 100%;
 }
 
-.left-title-bar {
+.macos-left-tb {
   @include titlebar;
   justify-content: flex-start;
 }
 
-.right-title-bar {
+.macos-right-tb {
   @include titlebar;
   justify-content: flex-end;
 }

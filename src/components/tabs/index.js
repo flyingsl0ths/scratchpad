@@ -4,18 +4,36 @@ import Tab from "@mui/material/Tab";
 import PaletteIcon from "@mui/icons-material/Palette";
 import CodeIcon from "@mui/icons-material/Code";
 import WindowIcon from "@mui/icons-material/Window";
+import PropTypes from "prop-types";
 
 import { VBox } from "../Containers";
 import ThemeTab from "./Theme";
 import LanguageTab from "./Language";
 import SceneTab from "./scene";
 
-function switchTab(index) {
+SettingsTabs.propTypes = {
+  handleLanguageChange: PropTypes.func.isRequired,
+  handleThemeChange: PropTypes.func.isRequired,
+  selectedLanguage: PropTypes.string.isRequired,
+  selectedTheme: PropTypes.string.isRequired
+};
+
+function switchTab(index, props) {
   switch (index) {
     case 0:
-      return <ThemeTab />;
+      return (
+        <ThemeTab
+          selectedTheme={props.selectedTheme}
+          handleThemeChange={props.handleThemeChange}
+        />
+      );
     case 1:
-      return <LanguageTab />;
+      return (
+        <LanguageTab
+          selectedLanguage={props.selectedLanguage}
+          handleLanguageChange={props.handleLanguageChange}
+        />
+      );
     case 2:
       return <SceneTab />;
     default:
@@ -23,10 +41,10 @@ function switchTab(index) {
   }
 }
 
-export default function SettingsTabs() {
+export default function SettingsTabs(props) {
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setValue(newValue);
   };
 
@@ -41,7 +59,7 @@ export default function SettingsTabs() {
         <Tab icon={<CodeIcon />} label="Language" />
         <Tab icon={<WindowIcon />} label="Scene" />
       </Tabs>
-      {switchTab(value)}
+      {switchTab(value, props)}
     </VBox>
   );
 }

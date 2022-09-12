@@ -38,20 +38,20 @@ export default function WindowSection() {
 function TitleBarOptions() {
   return (
     <List orientation="h">
-      <div className="rounded-img">
-        <TitleBar></TitleBar>
+      <div className="rounded-border">
+        <TitleBar theme="macos-left-tb" />
       </div>
 
-      <div className="rounded-img">
-        <TitleBar></TitleBar>
+      <div className="rounded-border">
+        <TitleBar theme="macos-right-tb" />
       </div>
 
-      <div className="rounded-img">
-        <TitleBar></TitleBar>
+      <div className="rounded-border">
+        <TitleBar theme="macos-left-tb" />
       </div>
 
-      <div className="rounded-img">
-        <TitleBar></TitleBar>
+      <div className="rounded-border">
+        <TitleBar theme="macos-right-tb" />
       </div>
     </List>
   );

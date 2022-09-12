@@ -2,11 +2,17 @@ import React from "react";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import BrushIcon from "@mui/icons-material/Brush";
+import PropTypes from "prop-types";
 
 import { VBox, HBox } from "../Containers";
 import Spacer from "../Spacer";
 import LabeledIcon from "../LabeledIcon";
 import { ButtonList } from "../list";
+
+ThemeTab.propTypes = {
+  selectedTheme: PropTypes.string.isRequired,
+  handleThemeChange: PropTypes.func.isRequired
+};
 
 export default function ThemeTab(props) {
   return (
@@ -22,13 +28,15 @@ export default function ThemeTab(props) {
       <Spacer amount="0.5em" />
       <ButtonList
         orientation="v"
+        selected={props.selectedTheme}
+        handleOnClick={props.handleThemeChange}
         labels={[
-          "Nord",
-          "Monokai",
-          "Catppuccin",
-          "GruvBox",
-          "Dracula",
-          "Tokyo Night"
+          "light",
+          "monokai",
+          "catppuccin",
+          "gruvBox",
+          "dracula",
+          "tokyo Night"
         ]}
       />
     </VBox>

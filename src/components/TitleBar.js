@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 
 import { HBox } from "./Containers.js";
 
+TitleBar.propTypes = {
+  theme: PropTypes.string.isRequired
+};
+
 Circle.propTypes = {
   color: PropTypes.string.isRequired
 };
@@ -13,7 +17,7 @@ function Circle(props) {
 
 export default function TitleBar(props) {
   return (
-    <HBox className="left-title-bar" centered={false}>
+    <HBox className={props.theme} centered={false}>
       <Circle color="red" />
       <Circle color="yellow" />
       <Circle color="green" />

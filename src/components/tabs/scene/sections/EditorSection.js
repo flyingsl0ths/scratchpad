@@ -1,13 +1,10 @@
 import React from "react";
 import EditorIcon from "@mui/icons-material/Wysiwyg";
 import { Checkbox } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Select from "@mui/material/Select";
 
 import Section from "./Section";
+import Selection from "../../../Selection";
 import SettingAccordion from "../SettingAccordion";
 import { VBox } from "../../../Containers";
 import Spacer from "../../../Spacer";
@@ -38,32 +35,20 @@ function EditorLinesOptions() {
 }
 
 function EditorFontOptions() {
+  const fonts = ["Font 1", "Font 2", "Font 3"];
+
   return (
     <VBox className="pd-s" centered={false}>
-      <FontSelect />
+      <Selection
+        defaultValue={1}
+        label="Select a font"
+        values={fonts}
+        onSelectionChanged={console.log}
+      />
       <Spacer amount="1em" />
       <FormControlLabel control={<Checkbox />} label="Show hidden characters" />
       <Spacer amount="1em" />
       <LabeledSlider label="Font size" min={1} max={100} step={1} />
     </VBox>
-  );
-}
-
-function FontSelect() {
-  const [selection, setFont] = React.useState("");
-
-  const handleChange = event => {
-    setFont(event.target.value);
-  };
-
-  return (
-    <FormControl fullWidth>
-      <InputLabel>Select a Font</InputLabel>
-      <Select value={selection} label="Select a Font" onChange={handleChange}>
-        <MenuItem value={10}>Font 1</MenuItem>
-        <MenuItem value={20}>Font 2</MenuItem>
-        <MenuItem value={30}>Font 3</MenuItem>
-      </Select>
-    </FormControl>
   );
 }
