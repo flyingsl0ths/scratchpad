@@ -7,6 +7,7 @@ import CodeEditor from "./CodeEditor";
 
 CodeWindow.propTypes = {
   dropShadowOffsets: PropTypes.object.isRequired,
+  dropShadowAlpha: PropTypes.number.isRequired,
   editorCode: PropTypes.string.isRequired,
   editorFont: PropTypes.string.isRequired,
   editorFontSize: PropTypes.number.isRequired,
@@ -24,8 +25,9 @@ CodeWindow.propTypes = {
 export default function CodeWindow(props) {
   const windowStyle = props.showDropShadow
     ? {
-        boxShadow: `${props.dropShadowOffsets.x}px ${props.dropShadowOffsets.y}px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)`
+        boxShadow: `${props.dropShadowOffsets.x}px ${
+          props.dropShadowOffsets.y
+        }px 8px 0 rgba(0,0,0,${props.dropShadowAlpha / 100})`
       }
     : {};
 

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 HBox.propTypes = {
   centered: PropTypes.bool.isRequired,
   className: PropTypes.string,
+  handleOnClick: PropTypes.func,
   id: PropTypes.string,
   style: PropTypes.object
 };
@@ -36,6 +37,7 @@ export function HBox(props) {
   const { className = "" } = props;
   return (
     <div
+      onClick={props.handleOnClick}
       id={props.id}
       style={props.style}
       className={`${props.centered ? "chbox" : "hbox"} ${className}`}>
