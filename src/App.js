@@ -13,10 +13,10 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorCode: `function doSomething() console.log("Hello World");`,
+      editorCode: `function doSomething() {\n console.log("Hello World"); \n}`,
       editorExtraThemes: [],
-      editorFont: '"Fira code", "Fira Mono", monospace',
-      editorFontSize: 1,
+      editorFont: "Fira code",
+      editorFontSize: 20,
       editorLanguage: "javascript",
       editorLineHeight: 1,
       editorTheme: "light",
@@ -84,12 +84,18 @@ export default class App extends React.Component {
       case CODE_WINDOW_CHANGES.EDITOR_FONT_SIZE_INCREASED:
         field = "editorFontSize";
         break;
+      case CODE_WINDOW_CHANGES.TITLEBAR:
+        field = "titlebarTheme";
+        break;
+      case CODE_WINDOW_CHANGES.EDITOR_FONT_CHANGED:
+        field = "editorFont";
+        break;
       default:
         console.error("Unexpected change!:\n", value);
         return;
     }
 
-    handleStateFieldChange(this, field)(value);
+    this.setState({ [field]: value });
   };
 
   render() {
