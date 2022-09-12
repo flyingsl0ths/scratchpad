@@ -5,6 +5,7 @@ import BrushIcon from "@mui/icons-material/Brush";
 import PropTypes from "prop-types";
 
 import { VBox, HBox } from "../Containers";
+import CodeWindowChanges from "../../CodeWindowEvents";
 import Spacer from "../Spacer";
 import LabeledIcon from "../LabeledIcon";
 import { ButtonList } from "../list";
@@ -15,6 +16,7 @@ ThemeTab.propTypes = {
 };
 
 export default function ThemeTab(props) {
+  const { CODE_WINDOW_CHANGES } = CodeWindowChanges;
   return (
     <VBox id="theme-tab" className="tab-item" centered={false}>
       <HBox className="sp-b" centered={false}>
@@ -29,7 +31,12 @@ export default function ThemeTab(props) {
       <ButtonList
         orientation="v"
         selected={props.selectedTheme}
-        handleOnClick={props.handleThemeChange}
+        handleOnClick={event =>
+          props.handleThemeChange(
+            CODE_WINDOW_CHANGES.THEME,
+            event.target.innerText
+          )
+        }
         labels={[
           "light",
           "monokai",

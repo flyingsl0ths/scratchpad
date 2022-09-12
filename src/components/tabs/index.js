@@ -12,8 +12,7 @@ import LanguageTab from "./Language";
 import SceneTab from "./scene";
 
 SettingsTabs.propTypes = {
-  handleLanguageChange: PropTypes.func.isRequired,
-  handleThemeChange: PropTypes.func.isRequired,
+  handleCodeWindowChanges: PropTypes.func.isRequired,
   selectedLanguage: PropTypes.string.isRequired,
   selectedTheme: PropTypes.string.isRequired
 };
@@ -24,18 +23,18 @@ function switchTab(index, props) {
       return (
         <ThemeTab
           selectedTheme={props.selectedTheme}
-          handleThemeChange={props.handleThemeChange}
+          handleThemeChange={props.handleCodeWindowChanges}
         />
       );
     case 1:
       return (
         <LanguageTab
           selectedLanguage={props.selectedLanguage}
-          handleLanguageChange={props.handleLanguageChange}
+          handleLanguageChange={props.handleCodeWindowChanges}
         />
       );
     case 2:
-      return <SceneTab />;
+      return <SceneTab handleSceneChanges={props.handleCodeWindowChanges} />;
     default:
       return undefined;
   }

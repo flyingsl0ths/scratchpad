@@ -6,6 +6,7 @@ import { VBox } from "../Containers";
 import { ButtonList } from "../list";
 import LabeledIcon from "../LabeledIcon";
 import Spacer from "../Spacer";
+import CodeWindowChanges from "../../CodeWindowEvents";
 
 LanguageTab.propTypes = {
   selectedLanguage: PropTypes.string.isRequired,
@@ -13,6 +14,7 @@ LanguageTab.propTypes = {
 };
 
 export default function LanguageTab(props) {
+  const { CODE_WINDOW_CHANGES } = CodeWindowChanges;
   return (
     <VBox id="lang-tab" className="tab-item" centered={false}>
       <LabeledIcon label="Language">
@@ -22,7 +24,12 @@ export default function LanguageTab(props) {
       <ButtonList
         orientation="v"
         selected={props.selectedLanguage}
-        handleOnClick={props.handleLanguageChange}
+        handleOnClick={event =>
+          props.handleLanguageChange(
+            CODE_WINDOW_CHANGES.LANGUAGE,
+            event.target.innerText
+          )
+        }
         labels={[
           "c",
           "c++",
