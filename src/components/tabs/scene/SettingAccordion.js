@@ -23,7 +23,7 @@ export default function SettingAccordion(props) {
           <VBox centered={false}>
             <h3 className="settings-title">{props.title}</h3>
             <Spacer amount="0.25em" />
-            <h4 className="sub-text">{props.subTitle}</h4>
+            <h4 className="settings-sub-title">{props.subTitle}</h4>
           </VBox>
         </AccordionSummary>
         <AccordionDetails>
