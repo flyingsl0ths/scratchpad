@@ -92,23 +92,39 @@ export default function WindowSection(props) {
 
 function TitleBarOptions(props) {
   return (
-    <List handleOnClick={props.handleWindowTitleBarChanged} orientation="h">
-      <div className="rounded-border">
-        <TitleBar theme="macos-left-tb" />
-      </div>
+    <List
+      handleOnClick={event =>
+        props.handleWindowTitleBarChanged(
+          event.target.closest(".rounded-border").dataset.theme
+        )
+      }
+      orientation="h">
+      <TitlebarThemeContainer theme="macos-left-tb" />
 
-      <div className="rounded-border">
-        <TitleBar theme="macos-right-tb" />
-      </div>
+      <TitlebarThemeContainer
+        theme="
+        macos-right-tb"
+      />
 
-      <div className="rounded-border">
-        <TitleBar theme="macos-left-tb" />
-      </div>
+      <TitlebarThemeContainer theme="macos-left-tb" />
 
-      <div className="rounded-border">
-        <TitleBar theme="macos-right-tb" />
-      </div>
+      <TitlebarThemeContainer
+        theme="
+        macos-right-tb"
+      />
     </List>
+  );
+}
+
+TitlebarThemeContainer.propTypes = {
+  theme: PropTypes.string.isRequired
+};
+
+function TitlebarThemeContainer(props) {
+  return (
+    <div data-theme={props.theme} className="rounded-border">
+      <TitleBar theme={props.theme} />
+    </div>
   );
 }
 
