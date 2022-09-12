@@ -22,7 +22,8 @@ EditorLinesOptions.propTypes = {
 };
 
 EditorFontOptions.propTypes = {
-  handleEditorFontSizeChanged: PropTypes.func.isRequired
+  handleEditorFontSizeChanged: PropTypes.func.isRequired,
+  handleEditorFontChanged: PropTypes.func.isRequired
 };
 
 export default function EditorSection(props) {
@@ -34,6 +35,10 @@ export default function EditorSection(props) {
         title="Font"
         subTitle="Adjust the editor's font settings">
         <EditorFontOptions
+          handleEditorFontChanged={withEventChange(
+            CODE_WINDOW_CHANGES.EDITOR_FONT_CHANGED,
+            props.handleEditorChanges
+          )}
           handleEditorFontSizeChanged={withEventChange(
             CODE_WINDOW_CHANGES.EDITOR_FONT_SIZE_INCREASED,
             props.handleEditorChanges
@@ -89,7 +94,15 @@ function EditorLinesOptions(props) {
 }
 
 function EditorFontOptions(props) {
-  const fonts = ["Font 1", "Font 2", "Font 3"];
+  const fonts = [
+    "Fira Code",
+    "JetBrains Mono",
+    "Source Code Pro",
+    "Space Mono",
+    "Ubuntu Mono",
+    "Anonymous Pro"
+  ];
+
   const spacerAmount = "1em";
 
   return (
@@ -98,7 +111,7 @@ function EditorFontOptions(props) {
         defaultValue={1}
         label="Select a font"
         values={fonts}
-        onSelectionChanged={console.log}
+        onSelectionChanged={(_, font) => props.handleEditorFontChanged(font)}
       />
 
       <Spacer amount={spacerAmount} />
@@ -111,7 +124,7 @@ function EditorFontOptions(props) {
         min={1}
         max={100}
         step={1}
-        defaultValue={1}
+        defaultValue={20}
         handleChange={props.handleEditorFontSizeChanged}
       />
     </VBox>

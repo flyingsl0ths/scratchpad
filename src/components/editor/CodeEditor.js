@@ -43,7 +43,11 @@ export default function CodeEditor(props) {
   return (
     <HBox
       id="editor"
-      style={{ fontSize: `${props.fontSize}vw`, lineHeight: props.lineHeight }}
+      style={{
+        fontSize: `${props.fontSize}px`,
+        lineHeight: props.lineHeight,
+        fontFamily: `"${props.fontFamily}"`
+      }}
       centered={false}>
       {props.showLines && (
         <Lines theme={props.theme} lineCount={computeCodeLines(props.code)} />
@@ -55,9 +59,6 @@ export default function CodeEditor(props) {
         highlight={code =>
           hljs.highlight(code, { language: props.language }).value
         }
-        style={{
-          fontFamily: props.fontFamily
-        }}
       />
     </HBox>
   );
