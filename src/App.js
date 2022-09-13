@@ -32,6 +32,53 @@ export default class App extends React.Component {
     };
   }
 
+  render() {
+    const spacerAmount = "2em";
+
+    return (
+      <VBox centered={true}>
+        <h1 id="header">Scratchpad</h1>
+
+        <Spacer amount={spacerAmount} />
+
+        <CodeWindow
+          dropShadowOffsets={{
+            x: this.state.windowDropShadowOffsetX,
+            y: this.state.windowDropShadowOffsetY
+          }}
+          dropShadowAlpha={this.state.windowDropShadowAlpha}
+          editorCode={this.state.editorCode}
+          editorFont={this.state.editorFont}
+          editorFontSize={this.state.editorFontSize}
+          editorLanguage={this.state.editorLanguage}
+          editorLineHeight={this.state.editorLineHeight}
+          editorTheme={this.state.editorTheme}
+          showDropShadow={this.state.showWindowDropShadow}
+          showEditorLineNumbers={this.state.showLineNumbers}
+          titlebarTheme={this.state.titlebarTheme}
+          windowBgColor={this.state.windowBgColor}
+          windowPadding={{
+            x: this.state.windowPaddingH,
+            y: this.state.windowPaddingV
+          }}
+          handleCodeChange={handleStateFieldChange(this, "editorCode")}
+        />
+
+        <Spacer amount={spacerAmount} />
+
+        <Screenshot />
+
+        <Spacer amount={spacerAmount} />
+
+        <SettingsTabs
+          selectedLanguage={this.state.editorLanguage}
+          selectedTheme={this.state.editorTheme}
+          handleCodeWindowChanges={this.handleChanges}
+        />
+      </VBox>
+    );
+  }
+
   handleLanguageChange = newLanguage => {
     newLanguage = newLanguage.toLowerCase();
     if (this.state.editorLanguage !== newLanguage) {
@@ -97,53 +144,6 @@ export default class App extends React.Component {
 
     this.setState({ [field]: value });
   };
-
-  render() {
-    const spacerAmount = "2em";
-
-    return (
-      <VBox centered={true}>
-        <h1 id="header">Scratchpad</h1>
-
-        <Spacer amount={spacerAmount} />
-
-        <CodeWindow
-          dropShadowOffsets={{
-            x: this.state.windowDropShadowOffsetX,
-            y: this.state.windowDropShadowOffsetY
-          }}
-          dropShadowAlpha={this.state.windowDropShadowAlpha}
-          editorCode={this.state.editorCode}
-          editorFont={this.state.editorFont}
-          editorFontSize={this.state.editorFontSize}
-          editorLanguage={this.state.editorLanguage}
-          editorLineHeight={this.state.editorLineHeight}
-          editorTheme={this.state.editorTheme}
-          showDropShadow={this.state.showWindowDropShadow}
-          showEditorLineNumbers={this.state.showLineNumbers}
-          titlebarTheme={this.state.titlebarTheme}
-          windowBgColor={this.state.windowBgColor}
-          windowPadding={{
-            x: this.state.windowPaddingH,
-            y: this.state.windowPaddingV
-          }}
-          handleCodeChange={handleStateFieldChange(this, "editorCode")}
-        />
-
-        <Spacer amount={spacerAmount} />
-
-        <Screenshot />
-
-        <Spacer amount={spacerAmount} />
-
-        <SettingsTabs
-          selectedLanguage={this.state.editorLanguage}
-          selectedTheme={this.state.editorTheme}
-          handleCodeWindowChanges={this.handleChanges}
-        />
-      </VBox>
-    );
-  }
 }
 
 function handleStateFieldChange(obj, fieldName) {
