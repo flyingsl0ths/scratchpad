@@ -74,6 +74,7 @@ export default class App extends React.Component {
           selectedLanguage={this.state.editorLanguage}
           selectedTheme={this.state.editorTheme}
           handleCodeWindowChanges={this.handleChanges}
+          windowBgColor={this.state.windowBgColor}
         />
       </VBox>
     );

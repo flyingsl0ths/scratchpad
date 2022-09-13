@@ -1,6 +1,7 @@
 import React from "react";
 import Checkbox from "@mui/material/Checkbox";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
+import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { HexColorPicker } from "react-colorful";
 import PropTypes from "prop-types";
@@ -15,7 +16,8 @@ import Spacer from "../../../Spacer";
 import CodeWindowChanges from "../../../../CodeWindowEvents";
 
 WindowSection.propTypes = {
-  handleSceneChanges: PropTypes.func.isRequired
+  handleSceneChanges: PropTypes.func.isRequired,
+  windowBgColor: PropTypes.string.isRequired
 };
 
 TitleBarOptions.propTypes = {
@@ -32,10 +34,12 @@ WindowBackdropOptions.propTypes = {
   handleWindowShadowYChanged: PropTypes.func.isRequired,
   handleWindowShadowAlphaChanged: PropTypes.func.isRequired,
   handleWindowShadowToggleChanged: PropTypes.func.isRequired,
-  handleWindowBgColorChanged: PropTypes.func.isRequired
+  handleWindowBgColorChanged: PropTypes.func.isRequired,
+  windowBgColor: PropTypes.string.isRequired
 };
 
 ColorPicker.propTypes = {
+  color: PropTypes.string.isRequired,
   handleColorChanged: PropTypes.func.isRequired
 };
 
@@ -94,6 +98,7 @@ export default function WindowSection(props) {
             CODE_WINDOW_CHANGES.BG_COLOR,
             props.handleSceneChanges
           )}
+          windowBgColor={props.windowBgColor}
         />
       </SettingAccordion>
     </Section>
@@ -180,7 +185,10 @@ function WindowBackdropOptions(props) {
 
       <Spacer amount={spacerAmount} />
 
-      <ColorPicker handleColorChanged={props.handleWindowBgColorChanged} />
+      <ColorPicker
+        color={props.windowBgColor}
+        handleColorChanged={props.handleWindowBgColorChanged}
+      />
 
       <Spacer amount={spacerAmount} />
 
@@ -215,11 +223,24 @@ function WindowBackdropOptions(props) {
 }
 
 function ColorPicker(props) {
+  const spacerAmount = "0.5em";
   return (
     <VBox centered={false}>
       <h4 className="fw-n">{`Background color`}</h4>
-      <Spacer amount="0.5em" />
-      <HexColorPicker color={"#1565c0"} onChange={props.handleColorChanged} />
+      <Spacer amount={spacerAmount} />
+      <HexColorPicker
+        style={{ width: "50%" }}
+        color={props.color}
+        onChange={props.handleColorChanged}
+      />
+      <Spacer amount={spacerAmount} />
+      <TextField
+        style={{ width: "10%" }}
+        label="Hex color"
+        value={props.color}
+        variant="outlined"
+        onChange={event => props.handleColorChanged(event.target.value)}
+      />
     </VBox>
   );
 }

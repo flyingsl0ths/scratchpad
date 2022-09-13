@@ -9,7 +9,8 @@ import { List } from "../../list";
 import { EditorSection, WindowSection } from "./sections";
 
 SceneTab.propTypes = {
-  handleSceneChanges: PropTypes.func.isRequired
+  handleSceneChanges: PropTypes.func.isRequired,
+  windowBgColor: PropTypes.string.isRequired
 };
 
 export default function SceneTab(props) {
@@ -20,7 +21,10 @@ export default function SceneTab(props) {
       </LabeledIcon>
       <Spacer amount="0.5em" />
       <List orientation="v">
-        <WindowSection handleSceneChanges={props.handleSceneChanges} />
+        <WindowSection
+          windowBgColor={props.windowBgColor}
+          handleSceneChanges={props.handleSceneChanges}
+        />
         <EditorSection handleEditorChanges={props.handleSceneChanges} />
       </List>
     </VBox>

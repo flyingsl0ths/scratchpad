@@ -116,9 +116,6 @@ function EditorFontOptions(props) {
 
       <Spacer amount={spacerAmount} />
 
-      <FormControlLabel control={<Checkbox />} label="Show hidden characters" />
-
-      <Spacer amount={spacerAmount} />
       <LabeledSlider
         label="Font size"
         min={1}

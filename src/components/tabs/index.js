@@ -14,7 +14,8 @@ import SceneTab from "./scene";
 SettingsTabs.propTypes = {
   handleCodeWindowChanges: PropTypes.func.isRequired,
   selectedLanguage: PropTypes.string.isRequired,
-  selectedTheme: PropTypes.string.isRequired
+  selectedTheme: PropTypes.string.isRequired,
+  windowBgColor: PropTypes.string.isRequired
 };
 
 function switchTab(index, props) {
@@ -34,7 +35,13 @@ function switchTab(index, props) {
         />
       );
     case 2:
-      return <SceneTab handleSceneChanges={props.handleCodeWindowChanges} />;
+      return (
+        <SceneTab
+          windowBgColor={props.windowBgColor}
+          invalidWindowBgColor={props.invalidWindowBgColor}
+          handleSceneChanges={props.handleCodeWindowChanges}
+        />
+      );
     default:
       return undefined;
   }
