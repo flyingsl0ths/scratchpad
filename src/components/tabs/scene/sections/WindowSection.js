@@ -2,6 +2,7 @@ import React from "react";
 import Checkbox from "@mui/material/Checkbox";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { HexColorPicker } from "react-colorful";
 import PropTypes from "prop-types";
 
 import SettingAccordion from "../SettingAccordion";
@@ -30,7 +31,12 @@ WindowBackdropOptions.propTypes = {
   handleWindowShadowXChanged: PropTypes.func.isRequired,
   handleWindowShadowYChanged: PropTypes.func.isRequired,
   handleWindowShadowAlphaChanged: PropTypes.func.isRequired,
-  handleWindowShadowToggleChanged: PropTypes.func.isRequired
+  handleWindowShadowToggleChanged: PropTypes.func.isRequired,
+  handleWindowBgColorChanged: PropTypes.func.isRequired
+};
+
+ColorPicker.propTypes = {
+  handleColorChanged: PropTypes.func.isRequired
 };
 
 export default function WindowSection(props) {
@@ -82,6 +88,10 @@ export default function WindowSection(props) {
           )}
           handleWindowShadowToggleChanged={withEventChange(
             CODE_WINDOW_CHANGES.SHADOW_TOGGLED,
+            props.handleSceneChanges
+          )}
+          handleWindowBgColorChanged={withEventChange(
+            CODE_WINDOW_CHANGES.BG_COLOR,
             props.handleSceneChanges
           )}
         />
@@ -167,7 +177,13 @@ function WindowBackdropOptions(props) {
         }
         label="Show shadows"
       />
+
       <Spacer amount={spacerAmount} />
+
+      <ColorPicker handleColorChanged={props.handleWindowBgColorChanged} />
+
+      <Spacer amount={spacerAmount} />
+
       <LabeledSlider
         label="Horizontal offset"
         min={1}
@@ -194,6 +210,16 @@ function WindowBackdropOptions(props) {
         defaultValue={2}
         handleChange={props.handleWindowShadowAlphaChanged}
       />
+    </VBox>
+  );
+}
+
+function ColorPicker(props) {
+  return (
+    <VBox centered={false}>
+      <h4 className="fw-n">{`Background color`}</h4>
+      <Spacer amount="0.5em" />
+      <HexColorPicker color={"#1565c0"} onChange={props.handleColorChanged} />
     </VBox>
   );
 }

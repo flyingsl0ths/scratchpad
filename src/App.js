@@ -137,6 +137,10 @@ export default class App extends React.Component {
       case CODE_WINDOW_CHANGES.EDITOR_FONT_CHANGED:
         field = "editorFont";
         break;
+      case CODE_WINDOW_CHANGES.BG_COLOR:
+        field = "windowBgColor";
+        break;
+
       default:
         console.error("Unexpected change!:\n", value);
         return;

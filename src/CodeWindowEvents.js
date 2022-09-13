@@ -12,7 +12,8 @@ const M = {
     EDITOR_LINES_INCREASED: 10,
     EDITOR_LINES_TOGGLED: 11,
     EDITOR_FONT_SIZE_INCREASED: 12,
-    EDITOR_FONT_CHANGED: 13
+    EDITOR_FONT_CHANGED: 13,
+    BG_COLOR: 14
   }),
   withEventChange(event_id, f) {
     return val => f(event_id, val);
