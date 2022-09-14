@@ -21,7 +21,8 @@ WindowSection.propTypes = {
 };
 
 TitleBarOptions.propTypes = {
-  handleWindowTitleBarChanged: PropTypes.func.isRequired
+  handleWindowTitleBarChanged: PropTypes.func.isRequired,
+  handleWindowTitleBarTitleChanged: PropTypes.func.isRequired
 };
 
 WindowPaddingOptions.propTypes = {
@@ -36,6 +37,10 @@ WindowBackdropOptions.propTypes = {
   handleWindowShadowToggleChanged: PropTypes.func.isRequired,
   handleWindowBgColorChanged: PropTypes.func.isRequired,
   windowBgColor: PropTypes.string.isRequired
+};
+
+TitlebarThemeContainer.propTypes = {
+  theme: PropTypes.string.isRequired
 };
 
 ColorPicker.propTypes = {
@@ -54,6 +59,10 @@ export default function WindowSection(props) {
         <TitleBarOptions
           handleWindowTitleBarChanged={withEventChange(
             CODE_WINDOW_CHANGES.TITLEBAR,
+            props.handleSceneChanges
+          )}
+          handleWindowTitleBarTitleChanged={withEventChange(
+            CODE_WINDOW_CHANGES.TITLEBAR_TITLE,
             props.handleSceneChanges
           )}
         />
@@ -106,27 +115,50 @@ export default function WindowSection(props) {
 }
 
 function TitleBarOptions(props) {
-  return (
-    <List
-      handleOnClick={event =>
-        props.handleWindowTitleBarChanged(
-          event.target.closest(".rounded-border").dataset.theme
-        )
-      }
-      orientation="h">
-      <TitlebarThemeContainer theme="macos" />
+  function WindowTitleTextField() {
+    return [
+      <h4 key={1} className="fw-n">{`Set the window's title`}</h4>,
 
-      <TitlebarThemeContainer
-        theme="
-        windows"
+      <Spacer key={2} amount="0.5em" />,
+
+      <TextField
+        key={3}
+        style={{ width: "20%" }}
+        label="Window title"
+        variant="outlined"
+        defaultValue={"HelloWorld.js"}
+        onChange={event =>
+          props.handleWindowTitleBarTitleChanged(event.target.value)
+        }
       />
-    </List>
+    ];
+  }
+
+  return (
+    <VBox centered={false}>
+      <List
+        handleOnClick={event =>
+          props.handleWindowTitleBarChanged(
+            event.target.closest(".rounded-border").dataset.theme
+          )
+        }
+        orientation="h">
+        <TitlebarThemeContainer theme="macos" />
+
+        <TitlebarThemeContainer
+          theme="
+        windows"
+        />
+      </List>
+
+      <Spacer amount="0.8em" />
+
+      <WindowTitleTextField />
+
+      <Spacer amount="0.2em" />
+    </VBox>
   );
 }
-
-TitlebarThemeContainer.propTypes = {
-  theme: PropTypes.string.isRequired
-};
 
 function TitlebarThemeContainer(props) {
   return (

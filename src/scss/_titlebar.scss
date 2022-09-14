@@ -3,9 +3,9 @@ $gray: #222629;
 @mixin titlebar($bg-color: #e6e9ed) {
   background-color: $bg-color;
   border-radius: 4px 4px 0 0;
-  padding: 0 0.6em;
   height: 100%;
   width: 100%;
+  align-items: center;
 }
 
 @mixin titlebar-item {
@@ -14,8 +14,8 @@ $gray: #222629;
 }
 
 .macos {
+  padding: 0 0 0 0.5em;
   @include titlebar;
-  justify-content: flex-start;
 }
 
 .windows {

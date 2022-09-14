@@ -1,20 +1,21 @@
 const M = {
   CODE_WINDOW_CHANGES: Object.freeze(
     [
-      "LANGUAGE",
-      "THEME",
-      "VERTICAL_PADDING",
-      "HORIZONTAL_PADDING",
-      "SHADOW_OFFSET_X",
-      "SHADOW_OFFSET_Y",
-      "SHADOW_ALPHA",
-      "SHADOW_TOGGLED",
-      "TITLEBAR",
+      "BG_COLOR",
+      "EDITOR_FONT_CHANGED",
+      "EDITOR_FONT_SIZE_INCREASED",
       "EDITOR_LINES_INCREASED",
       "EDITOR_LINES_TOGGLED",
-      "EDITOR_FONT_SIZE_INCREASED",
-      "EDITOR_FONT_CHANGED",
-      "BG_COLOR"
+      "HORIZONTAL_PADDING",
+      "LANGUAGE",
+      "SHADOW_ALPHA",
+      "SHADOW_OFFSET_X",
+      "SHADOW_OFFSET_Y",
+      "SHADOW_TOGGLED",
+      "THEME",
+      "TITLEBAR",
+      "TITLEBAR_TITLE",
+      "VERTICAL_PADDING"
     ].reduce((obj, v, i) => {
       obj[v] = i + 1;
       return obj;

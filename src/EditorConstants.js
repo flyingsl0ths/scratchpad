@@ -1,14 +1,6 @@
 const EditorConstants = {
-  THEMES: new Map([
-    ["default", "white"],
-    ["dark", "black"],
-    ["gruvbox-dark-hard", "gray"],
-    ["atom-one-dark", "black"],
-    ["base16-dracula", "black"],
-    ["monokai", "black"],
-    ["nord", "gray"],
-    ["tokyo-night-dark", "black"]
-  ]),
+  MAX_TITLEBAR_LENGTH: 30,
+
   THEME_NAMES: Object.freeze([
     "default",
     "dark",

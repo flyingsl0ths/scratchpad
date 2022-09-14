@@ -17,6 +17,7 @@ CodeWindow.propTypes = {
   showDropShadow: PropTypes.bool.isRequired,
   showEditorLineNumbers: PropTypes.bool.isRequired,
   titlebarTheme: PropTypes.string.isRequired,
+  titlebarTitle: PropTypes.string,
   windowBgColor: PropTypes.string.isRequired,
   windowPadding: PropTypes.object.isRequired
 };
@@ -38,7 +39,7 @@ export default function CodeWindow(props) {
   return (
     <VBox id="code-window-bg" style={windowBgStyle} centered={false}>
       <VBox id="code-window" style={windowStyle} centered={false}>
-        <TitleBar theme={props.titlebarTheme} />
+        <TitleBar theme={props.titlebarTheme} title={props.titlebarTitle} />
         <CodeEditor
           fontSize={props.editorFontSize}
           fontFamily={props.editorFont}

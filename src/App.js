@@ -8,6 +8,7 @@ import Screenshot from "./components/Screenshot";
 import CodeWindowEvents from "./CodeWindowEvents";
 
 import "./css/index.css";
+import EditorConstants from "./EditorConstants";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -21,15 +22,16 @@ export default class App extends React.Component {
       editorLanguage: "javascript",
       editorLineHeight: 1,
       editorTheme: defaultTheme,
-      titlebarTheme: "macos",
       showLineNumbers: true,
       showWindowDropShadow: true,
+      titlbarTitle: "HelloWorld.js",
+      titlebarTheme: "macos",
       windowBgColor: "#1565c0",
+      windowDropShadowAlpha: 20,
       windowDropShadowOffsetX: 1,
       windowDropShadowOffsetY: 2,
-      windowDropShadowAlpha: 20,
-      windowPaddingV: 5,
-      windowPaddingH: 5
+      windowPaddingH: 5,
+      windowPaddingV: 5
     };
 
     updateTheme(defaultTheme);
@@ -58,6 +60,7 @@ export default class App extends React.Component {
           showDropShadow={this.state.showWindowDropShadow}
           showEditorLineNumbers={this.state.showLineNumbers}
           titlebarTheme={this.state.titlebarTheme}
+          titlebarTitle={this.state.titlbarTitle}
           windowBgColor={this.state.windowBgColor}
           windowPadding={{
             x: this.state.windowPaddingH,
@@ -92,7 +95,7 @@ export default class App extends React.Component {
   handleThemeChange = theme => {
     theme = theme.toLowerCase();
 
-    const updatedTheme = theme.slice().replace(/ /g, "-");
+    const updatedTheme = theme.slice().replace(/\s/g, "-");
 
     if (this.state.editorTheme === updatedTheme) {
       return;
@@ -107,7 +110,15 @@ export default class App extends React.Component {
 
   handleChanges = (change, value) => {
     const { CODE_WINDOW_CHANGES } = CodeWindowEvents;
+
     let field;
+
+    const onTitleBarTitleChanged = () => {
+      field = "titlbarTitle";
+      if (value && value.length > EditorConstants.MAX_TITLEBAR_LENGTH) {
+        value = value.slice(0, EditorConstants.MAX_TITLEBAR_LENGTH) + "...";
+      }
+    };
 
     switch (change) {
       case CODE_WINDOW_CHANGES.LANGUAGE:
@@ -145,6 +156,9 @@ export default class App extends React.Component {
         break;
       case CODE_WINDOW_CHANGES.TITLEBAR:
         field = "titlebarTheme";
+        break;
+      case CODE_WINDOW_CHANGES.TITLEBAR_TITLE:
+        onTitleBarTitleChanged();
         break;
       case CODE_WINDOW_CHANGES.EDITOR_FONT_CHANGED:
         field = "editorFont";

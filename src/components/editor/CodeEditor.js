@@ -10,13 +10,13 @@ Lines.propTypes = {
 };
 
 CodeEditor.propTypes = {
-  fontSize: PropTypes.number.isRequired,
   fontFamily: PropTypes.string.isRequired,
+  fontSize: PropTypes.number.isRequired,
+  handleCodeChange: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,
   lineHeight: PropTypes.number.isRequired,
   showLines: PropTypes.bool.isRequired,
-  theme: PropTypes.string.isRequired,
-  handleCodeChange: PropTypes.func.isRequired
+  theme: PropTypes.string.isRequired
 };
 
 function Lines(props) {
