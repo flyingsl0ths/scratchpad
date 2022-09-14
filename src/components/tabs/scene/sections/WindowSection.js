@@ -149,7 +149,7 @@ function WindowPaddingOptions(props) {
       <LabeledSlider
         label="Horizontal Padding"
         min={1}
-        max={100}
+        max={20}
         step={1}
         defaultValue={5}
         handleChange={props.handleHPaddingChanged}
@@ -158,7 +158,7 @@ function WindowPaddingOptions(props) {
       <LabeledSlider
         label="Vertical Padding"
         min={1}
-        max={100}
+        max={20}
         step={1}
         defaultValue={5}
         handleChange={props.handleVPaddingChanged}

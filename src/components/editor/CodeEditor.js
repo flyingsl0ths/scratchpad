@@ -2,7 +2,6 @@ import React from "react";
 import Editor from "react-simple-code-editor";
 import PropTypes from "prop-types";
 import hljs from "highlight.js";
-import "highlight.js/styles/default.css";
 
 import { HBox, VBox } from "../Containers";
 
@@ -18,7 +17,6 @@ CodeEditor.propTypes = {
   lineHeight: PropTypes.number.isRequired,
   showLines: PropTypes.bool.isRequired,
   theme: PropTypes.string.isRequired,
-  code: PropTypes.string.isRequired,
   handleCodeChange: PropTypes.func.isRequired
 };
 
@@ -34,15 +32,20 @@ function Lines(props) {
       id="editor-lines"
       style={computeLineStyle(props.theme)}
       centered={false}>
-      <ol id="lines">{lines}</ol>
+      <ol className="lines">{lines}</ol>
     </VBox>
   );
 }
 
 export default function CodeEditor(props) {
+  const [code, setCode] = React.useState(
+    'function doSomething() console.log("Hello!");'
+  );
+
   return (
     <HBox
       id="editor"
+      className="hljs"
       style={{
         fontSize: `${props.fontSize}px`,
         lineHeight: props.lineHeight,
@@ -50,12 +53,12 @@ export default function CodeEditor(props) {
       }}
       centered={false}>
       {props.showLines && (
-        <Lines theme={props.theme} lineCount={computeCodeLines(props.code)} />
+        <Lines theme={props.theme} lineCount={computeCodeLines(code)} />
       )}
 
       <Editor
-        value={props.code}
-        onValueChange={code => props.handleCodeChange(code)}
+        value={code}
+        onValueChange={setCode}
         highlight={code =>
           hljs.highlight(code, { language: props.language }).value
         }

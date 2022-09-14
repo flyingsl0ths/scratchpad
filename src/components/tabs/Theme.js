@@ -5,6 +5,7 @@ import BrushIcon from "@mui/icons-material/Brush";
 import PropTypes from "prop-types";
 
 import { VBox, HBox } from "../Containers";
+import EditorThemes from "../../EditorThemes";
 import CodeWindowChanges from "../../CodeWindowEvents";
 import Spacer from "../Spacer";
 import LabeledIcon from "../LabeledIcon";
@@ -37,14 +38,7 @@ export default function ThemeTab(props) {
             event.target.innerText
           )
         }
-        labels={[
-          "light",
-          "monokai",
-          "catppuccin",
-          "gruvBox",
-          "dracula",
-          "tokyo Night"
-        ]}
+        labels={EditorThemes.THEME_NAMES}
       />
     </VBox>
   );

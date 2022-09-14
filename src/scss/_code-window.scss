@@ -1,6 +1,5 @@
 #code-window {
   width: 60vw;
-  background-color: white;
   border-radius: 4px;
 }
 
@@ -12,7 +11,7 @@
   padding: 1em;
 }
 
-#lines {
+.lines {
   list-style: none;
   user-select: none;
   padding: 0 1em 0 0;
@@ -22,16 +21,4 @@
   border-radius: 360px;
   margin: 1vh 0.45vw;
   padding: 0.5vw;
-}
-
-.red {
-  background-color: #ed5565;
-}
-
-.green {
-  background-color: #48cfad;
-}
-
-.yellow {
-  background-color: #ffce54;
 }

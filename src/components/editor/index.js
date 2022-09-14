@@ -6,9 +6,8 @@ import { VBox } from "../Containers";
 import CodeEditor from "./CodeEditor";
 
 CodeWindow.propTypes = {
-  dropShadowOffsets: PropTypes.object.isRequired,
   dropShadowAlpha: PropTypes.number.isRequired,
-  editorCode: PropTypes.string.isRequired,
+  dropShadowOffsets: PropTypes.object.isRequired,
   editorFont: PropTypes.string.isRequired,
   editorFontSize: PropTypes.number.isRequired,
   editorLanguage: PropTypes.string.isRequired,
@@ -41,7 +40,6 @@ export default function CodeWindow(props) {
       <VBox id="code-window" style={windowStyle} centered={false}>
         <TitleBar theme={props.titlebarTheme} />
         <CodeEditor
-          code={props.editorCode}
           fontSize={props.editorFontSize}
           fontFamily={props.editorFont}
           theme={props.editorTheme}

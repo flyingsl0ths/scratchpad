@@ -12,14 +12,15 @@ import "./css/index.css";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    const defaultTheme = "default";
+
     this.state = {
-      editorCode: `function doSomething() {\n console.log("Hello World"); \n}`,
       editorExtraThemes: [],
       editorFont: "Fira code",
       editorFontSize: 20,
       editorLanguage: "javascript",
       editorLineHeight: 1,
-      editorTheme: "light",
+      editorTheme: defaultTheme,
       titlebarTheme: "macos-left-tb",
       showLineNumbers: true,
       showWindowDropShadow: true,
@@ -30,6 +31,8 @@ export default class App extends React.Component {
       windowPaddingV: 5,
       windowPaddingH: 5
     };
+
+    updateTheme(defaultTheme);
   }
 
   render() {
@@ -47,7 +50,6 @@ export default class App extends React.Component {
             y: this.state.windowDropShadowOffsetY
           }}
           dropShadowAlpha={this.state.windowDropShadowAlpha}
-          editorCode={this.state.editorCode}
           editorFont={this.state.editorFont}
           editorFontSize={this.state.editorFontSize}
           editorLanguage={this.state.editorLanguage}
@@ -61,7 +63,7 @@ export default class App extends React.Component {
             x: this.state.windowPaddingH,
             y: this.state.windowPaddingV
           }}
-          handleCodeChange={handleStateFieldChange(this, "editorCode")}
+          handleCodeChange={() => {}}
         />
 
         <Spacer amount={spacerAmount} />
@@ -87,11 +89,20 @@ export default class App extends React.Component {
     }
   };
 
-  handleThemeChange = newTheme => {
-    newTheme = newTheme.toLowerCase();
-    if (this.state.editorTheme !== newTheme) {
-      this.setState({ editorTheme: newTheme });
+  handleThemeChange = theme => {
+    theme = theme.toLowerCase();
+
+    const updatedTheme = theme.slice().replace(/ /g, "-");
+
+    if (this.state.editorTheme === updatedTheme) {
+      return;
     }
+
+    updateTheme(updatedTheme);
+
+    this.setState({
+      editorTheme: theme
+    });
   };
 
   handleChanges = (change, value) => {
@@ -151,8 +162,19 @@ export default class App extends React.Component {
   };
 }
 
-function handleStateFieldChange(obj, fieldName) {
-  return newValue => {
-    obj.setState({ [fieldName]: newValue });
-  };
+function updateTheme(theme) {
+  document.head.querySelectorAll("link").forEach(link => {
+    if (link.dataset.id === "editor-theme") {
+      link.remove();
+      return;
+    }
+  });
+
+  const style = document.createElement("link");
+  style.dataset.id = "editor-theme";
+  style.href = `/styles/${theme}.css`;
+  style.rel = "stylesheet";
+  style.async = true;
+
+  document.head.appendChild(style);
 }
