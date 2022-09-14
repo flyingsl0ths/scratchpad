@@ -3,7 +3,7 @@ import BrushIcon from "@mui/icons-material/Brush";
 import PropTypes from "prop-types";
 
 import { VBox } from "../Containers";
-import EditorThemes from "../../EditorThemes";
+import EditorConstants from "../../EditorConstants";
 import CodeWindowChanges from "../../CodeWindowEvents";
 import Spacer from "../Spacer";
 import LabeledIcon from "../LabeledIcon";
@@ -31,7 +31,7 @@ export default function ThemeTab(props) {
             event.target.innerText
           )
         }
-        labels={EditorThemes.THEME_NAMES}
+        labels={EditorConstants.THEME_NAMES}
       />
     </VBox>
   );
