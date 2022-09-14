@@ -138,8 +138,6 @@ export default function LanguageTab(props) {
     "protocol",
     "puppet",
     "python",
-    "python",
-    "python",
     "q",
     "qml",
     "r",
