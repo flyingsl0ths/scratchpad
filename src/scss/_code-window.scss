@@ -9,16 +9,11 @@
 
 #editor {
   padding: 1em;
+  border-radius: 0 0 4px 4px;
 }
 
 .lines {
   list-style: none;
   user-select: none;
   padding: 0 1em 0 0;
-}
-
-.button {
-  border-radius: 360px;
-  margin: 1vh 0.45vw;
-  padding: 0.5vw;
 }
