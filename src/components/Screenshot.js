@@ -64,7 +64,7 @@ export default class Screenshot extends React.Component {
 
           <Selection
             defaultValue={1}
-            label="File extension"
+            label="Export as"
             values={Screenshot.FILE_EXTENSIONS}
             onSelectionChanged={this.handleFileExtensionChanged}
           />
