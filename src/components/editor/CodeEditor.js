@@ -6,8 +6,7 @@ import hljs from "highlight.js";
 import { HBox, VBox } from "../Containers";
 
 Lines.propTypes = {
-  lineCount: PropTypes.number.isRequired,
-  theme: PropTypes.string
+  lineCount: PropTypes.number.isRequired
 };
 
 CodeEditor.propTypes = {
@@ -28,10 +27,7 @@ function Lines(props) {
   }
 
   return (
-    <VBox
-      id="editor-lines"
-      style={computeLineStyle(props.theme)}
-      centered={false}>
+    <VBox id="editor-lines" centered={false}>
       <ol className="lines">{lines}</ol>
     </VBox>
   );
@@ -39,7 +35,7 @@ function Lines(props) {
 
 export default function CodeEditor(props) {
   const [code, setCode] = React.useState(
-    'function doSomething() console.log("Hello!");'
+    'function doSomething() {\n console.log("Hello!"); \n}'
   );
 
   return (
@@ -52,9 +48,7 @@ export default function CodeEditor(props) {
         fontFamily: `"${props.fontFamily}"`
       }}
       centered={false}>
-      {props.showLines && (
-        <Lines theme={props.theme} lineCount={computeCodeLines(code)} />
-      )}
+      {props.showLines && <Lines lineCount={computeCodeLines(code)} />}
 
       <Editor
         value={code}
@@ -80,8 +74,4 @@ function computeCodeLines(code) {
   }
 
   return lines;
-}
-
-function computeLineStyle(theme) {
-  return {};
 }
