@@ -21,7 +21,7 @@ export default class App extends React.Component {
       editorLanguage: "javascript",
       editorLineHeight: 1,
       editorTheme: defaultTheme,
-      titlebarTheme: "macos-left-tb",
+      titlebarTheme: "macos",
       showLineNumbers: true,
       showWindowDropShadow: true,
       windowBgColor: "#1565c0",

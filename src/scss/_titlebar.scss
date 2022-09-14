@@ -1,25 +1,59 @@
-@mixin titlebar {
-  background-color: #e6e9ed;
+$gray: #222629;
+
+@mixin titlebar($bg-color: #e6e9ed) {
+  background-color: $bg-color;
   border-radius: 4px 4px 0 0;
-  padding: 0.25vh 0.5vw;
+  padding: 0 0.6em;
   height: 100%;
   width: 100%;
 }
 
-.macos-left-tb {
+@mixin titlebar-item {
+  margin: 0.7em 0.4em;
+  padding: 0.5em;
+}
+
+.macos {
   @include titlebar;
   justify-content: flex-start;
 }
 
-.macos-right-tb {
+.windows {
   @include titlebar;
   justify-content: flex-end;
 }
 
+.square {
+  @include titlebar-item;
+  border-radius: 3px;
+  border: 2px solid $gray;
+  vertical-align: middle;
+}
+
+.letter-x::before {
+  @include titlebar-item;
+  content: "X";
+  color: $gray;
+  vertical-align: middle;
+  font-style: bold;
+}
+
+.underscore::before {
+  @include titlebar-item;
+  content: "_";
+  color: $gray;
+  font-style: bold;
+  vertical-align: middle;
+}
+
 .button {
+  @include titlebar-item;
   border-radius: 360px;
-  margin: 1vh 0.45vw;
-  padding: 0.5vw;
+}
+
+.circle {
+  @include titlebar-item;
+  border-radius: 360px;
 }
 
 .red {
@@ -32,4 +66,8 @@
 
 .yellow {
   background-color: #ffce54;
+}
+
+.selected {
+  border: 5px solid red;
 }

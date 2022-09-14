@@ -47,7 +47,8 @@ export function ButtonList(props) {
       sx={{
         margin: "0.5em auto",
         padding: "1em",
-        width: "90%"
+        width: "90%",
+        fontSize: "0.8vw"
       }}
       fullWidth={true}
       key={i}

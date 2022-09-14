@@ -114,18 +114,11 @@ function TitleBarOptions(props) {
         )
       }
       orientation="h">
-      <TitlebarThemeContainer theme="macos-left-tb" />
+      <TitlebarThemeContainer theme="macos" />
 
       <TitlebarThemeContainer
         theme="
-        macos-right-tb"
-      />
-
-      <TitlebarThemeContainer theme="macos-left-tb" />
-
-      <TitlebarThemeContainer
-        theme="
-        macos-right-tb"
+        windows"
       />
     </List>
   );
