@@ -114,10 +114,13 @@ export default class App extends React.Component {
     let field;
 
     const onTitleBarTitleChanged = () => {
-      field = "titlbarTitle";
+      console.log(value);
       if (value && value.length > EditorConstants.MAX_TITLEBAR_LENGTH) {
-        value = value.slice(0, EditorConstants.MAX_TITLEBAR_LENGTH) + "...";
+        value =
+          value.slice(0, value.length - EditorConstants.MAX_TITLEBAR_LENGTH) +
+          "...";
       }
+      return "titlbarTitle";
     };
 
     switch (change) {
@@ -158,7 +161,7 @@ export default class App extends React.Component {
         field = "titlebarTheme";
         break;
       case CODE_WINDOW_CHANGES.TITLEBAR_TITLE:
-        onTitleBarTitleChanged();
+        field = onTitleBarTitleChanged();
         break;
       case CODE_WINDOW_CHANGES.EDITOR_FONT_CHANGED:
         field = "editorFont";

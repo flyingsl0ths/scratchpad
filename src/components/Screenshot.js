@@ -74,6 +74,7 @@ export default class Screenshot extends React.Component {
 
         <Button
           variant="contained"
+          size="medium"
           onClick={this.handleScreenshot}
           startIcon={<ScreenshotMonitor />}>
           Screenshot

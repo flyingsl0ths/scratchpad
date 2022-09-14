@@ -17,3 +17,9 @@
   user-select: none;
   padding: 0 1em 0 0;
 }
+
+@media (max-width: 414px) {
+  #code-window {
+    width: 91vw;
+  }
+}

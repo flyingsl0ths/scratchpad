@@ -47,11 +47,11 @@ export function ButtonList(props) {
       sx={{
         margin: "0.5em auto",
         padding: "1em",
-        width: "90%",
-        fontSize: "0.8vw"
+        width: "90%"
       }}
       fullWidth={true}
       key={i}
+      size="large"
       component="div">
       {label}
     </Button>

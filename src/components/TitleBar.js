@@ -33,13 +33,13 @@ function computeThemeProps(theme, title) {
       <TitlebarItem key={1} className="circle" color="red" />,
       <TitlebarItem key={2} className="circle" color="yellow" />,
       <TitlebarItem key={3} className="circle" color="green" />,
-      <h4 key={4} className="m-ll fw-n">
+      <h4 key={4} className="m-l fw-n">
         {title}
       </h4>
     ];
   } else if (theme.includes("windows")) {
     result = [
-      <h4 key={1} className="m-ll fw-n">
+      <h4 key={1} className="m-r fw-n">
         {title}
       </h4>,
       <TitlebarItem key={2} className="underscore" />,

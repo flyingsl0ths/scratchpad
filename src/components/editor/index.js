@@ -32,7 +32,7 @@ export default function CodeWindow(props) {
     : {};
 
   const windowBgStyle = {
-    padding: `${props.windowPadding.y}em ${props.windowPadding.x}em`,
+    padding: `${props.windowPadding.y}% ${props.windowPadding.x}%`,
     backgroundColor: props.windowBgColor
   };
 

@@ -7,7 +7,7 @@ import { HexColorPicker } from "react-colorful";
 import PropTypes from "prop-types";
 
 import SettingAccordion from "../SettingAccordion";
-import { VBox } from "../../../Containers";
+import { HBox, VBox } from "../../../Containers";
 import { List } from "../../../list";
 import Section from "./Section";
 import LabeledSlider from "../LabeledSlider";
@@ -115,25 +115,6 @@ export default function WindowSection(props) {
 }
 
 function TitleBarOptions(props) {
-  function WindowTitleTextField() {
-    return [
-      <h4 key={1} className="fw-n">{`Set the window's title`}</h4>,
-
-      <Spacer key={2} amount="0.5em" />,
-
-      <TextField
-        key={3}
-        style={{ width: "20%" }}
-        label="Window title"
-        variant="outlined"
-        defaultValue={"HelloWorld.js"}
-        onChange={event =>
-          props.handleWindowTitleBarTitleChanged(event.target.value)
-        }
-      />
-    ];
-  }
-
   return (
     <VBox centered={false}>
       <List
@@ -150,11 +131,22 @@ function TitleBarOptions(props) {
         windows"
         />
       </List>
-
       <Spacer amount="0.8em" />
-
-      <WindowTitleTextField />
-
+      <h4 className="fw-n">{`Set the window's title`}</h4>
+      <Spacer amount="0.5em" />
+      <HBox centered={false}>
+        <TextField
+          size="medium"
+          fullWidth={false}
+          label="Window title"
+          variant="outlined"
+          defaultValue={"HelloWorld.js"}
+          onChange={event =>
+            props.handleWindowTitleBarTitleChanged(event.target.value)
+          }
+        />
+        <Spacer amount="0.2em" />
+      </HBox>
       <Spacer amount="0.2em" />
     </VBox>
   );
@@ -193,7 +185,7 @@ function WindowPaddingOptions(props) {
 }
 
 function WindowBackdropOptions(props) {
-  const spacerAmount = "1em";
+  const spacerAmount = "0.7em";
   return (
     <VBox className="pd-s" centered={false}>
       <FormControlLabel
@@ -225,6 +217,7 @@ function WindowBackdropOptions(props) {
         defaultValue={1}
         handleChange={props.handleWindowShadowXChanged}
       />
+
       <Spacer amount={spacerAmount} />
       <LabeledSlider
         label="Vertical offset"
@@ -248,24 +241,28 @@ function WindowBackdropOptions(props) {
 }
 
 function ColorPicker(props) {
-  const spacerAmount = "0.5em";
+  const spacerAmount = "0.7em";
   return (
     <VBox centered={false}>
       <h4 className="fw-n">{`Background color`}</h4>
       <Spacer amount={spacerAmount} />
       <HexColorPicker
-        style={{ width: "50%" }}
+        style={{ width: "100%" }}
         color={props.color}
         onChange={props.handleColorChanged}
       />
       <Spacer amount={spacerAmount} />
-      <TextField
-        style={{ width: "10%" }}
-        label="Hex color"
-        value={props.color}
-        variant="outlined"
-        onChange={event => props.handleColorChanged(event.target.value)}
-      />
+      <HBox centered={false}>
+        <TextField
+          size="medium"
+          fullWidth={false}
+          label="Hex color"
+          value={props.color}
+          variant="outlined"
+          onChange={event => props.handleColorChanged(event.target.value)}
+        />
+        <Spacer amount="0.2em" />
+      </HBox>
     </VBox>
   );
 }
