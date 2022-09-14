@@ -18,10 +18,12 @@ VBox.propTypes = {
 };
 
 export function VBox(props) {
-  const { className = "" } = props;
+  const { className = " " } = props;
   return (
     <div
-      onClick={props.handleOnClick}
+      onClick={event =>
+        forwardEvent(event, props, ["vbox", "cvbox", className])
+      }
       id={props.id}
       style={props.style}
       className={`${props.centered ? "cvbox" : "vbox"} ${className}`}>
@@ -34,10 +36,12 @@ export function VBox(props) {
 }
 
 export function HBox(props) {
-  const { className = "" } = props;
+  const { className = " " } = props;
   return (
     <div
-      onClick={props.handleOnClick}
+      onClick={event =>
+        forwardEvent(event, props, ["hbox", "chbox", className])
+      }
       id={props.id}
       style={props.style}
       className={`${props.centered ? "chbox" : "hbox"} ${className}`}>
@@ -47,4 +51,14 @@ export function HBox(props) {
       }
     </div>
   );
+}
+
+function forwardEvent(event, props, filters) {
+  const target = event.target;
+  if (
+    props.handleOnClick &&
+    filters.filter(f => target.classList.contains(f)).length == 0
+  ) {
+    props.handleOnClick(event);
+  }
 }
