@@ -1,6 +1,6 @@
 import React from "react";
 
-import { VBox } from "./components/Containers";
+import { HBox, VBox } from "./components/Containers";
 import CodeWindow from "./components/editor";
 import Spacer from "./components/Spacer";
 import SettingsTabs from "./components/tabs";
@@ -8,6 +8,7 @@ import Screenshot from "./components/Screenshot";
 import CodeWindowEvents from "./CodeWindowEvents";
 
 import "./css/index.css";
+
 import EditorConstants from "./EditorConstants";
 
 export default class App extends React.Component {
@@ -42,7 +43,19 @@ export default class App extends React.Component {
 
     return (
       <VBox centered={true}>
-        <h1 id="header">Scratchpad</h1>
+        <HBox centered={true}>
+          <h1 id="header">Scratchpad</h1>
+          <a
+            href="https://github.com/flyingsl0ths/scratchpad"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img
+              src="/github.svg"
+              alt="Github logo"
+              style={{ marginTop: "0.5em" }}
+            />
+          </a>
+        </HBox>
 
         <Spacer amount={spacerAmount} />
 
