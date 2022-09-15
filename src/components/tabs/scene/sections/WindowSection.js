@@ -21,8 +21,7 @@ WindowSection.propTypes = {
 };
 
 TitleBarOptions.propTypes = {
-  handleWindowTitleBarChanged: PropTypes.func.isRequired,
-  handleWindowTitleBarTitleChanged: PropTypes.func.isRequired
+  handleWindowTitleBarChanged: PropTypes.func.isRequired
 };
 
 WindowPaddingOptions.propTypes = {
@@ -49,7 +48,8 @@ ColorPicker.propTypes = {
 };
 
 export default function WindowSection(props) {
-  const { CODE_WINDOW_CHANGES, withEventChange } = CodeWindowChanges;
+  const { CODE_WINDOW_CHANGES, withEventChange: withEventChange } =
+    CodeWindowChanges;
 
   return (
     <Section title="Window" icon={<WebAssetIcon />}>
@@ -59,10 +59,6 @@ export default function WindowSection(props) {
         <TitleBarOptions
           handleWindowTitleBarChanged={withEventChange(
             CODE_WINDOW_CHANGES.TITLEBAR,
-            props.handleSceneChanges
-          )}
-          handleWindowTitleBarTitleChanged={withEventChange(
-            CODE_WINDOW_CHANGES.TITLEBAR_TITLE,
             props.handleSceneChanges
           )}
         />
@@ -131,23 +127,6 @@ function TitleBarOptions(props) {
         windows"
         />
       </List>
-      <Spacer amount="0.8em" />
-      <h4 className="fw-n">{`Set the window's title`}</h4>
-      <Spacer amount="0.5em" />
-      <HBox centered={false}>
-        <TextField
-          size="medium"
-          fullWidth={false}
-          label="Window title"
-          variant="outlined"
-          defaultValue={"HelloWorld.js"}
-          onChange={event =>
-            props.handleWindowTitleBarTitleChanged(event.target.value)
-          }
-        />
-        <Spacer amount="0.2em" />
-      </HBox>
-      <Spacer amount="0.2em" />
     </VBox>
   );
 }

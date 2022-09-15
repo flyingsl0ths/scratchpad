@@ -1,6 +1,4 @@
 const EditorConstants = {
-  MAX_TITLEBAR_LENGTH: 30,
-
   THEME_NAMES: Object.freeze([
     "default",
     "dark",

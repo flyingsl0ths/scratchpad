@@ -27,7 +27,8 @@ EditorFontOptions.propTypes = {
 };
 
 export default function EditorSection(props) {
-  const { CODE_WINDOW_CHANGES, withEventChange } = CodeWindowEvents;
+  const { CODE_WINDOW_CHANGES, withEventChange: withEventChange } =
+    CodeWindowEvents;
 
   return (
     <Section title="Editor" icon={<EditorIcon />}>
@@ -85,8 +86,8 @@ function EditorLinesOptions(props) {
         label="Line height"
         min={1}
         max={100}
-        step={1}
-        defaultValue={1}
+        step={0.1}
+        defaultValue={1.2}
         handleChange={props.handleEditorLinesChanged}
       />
     </VBox>

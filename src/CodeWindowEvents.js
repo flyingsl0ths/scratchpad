@@ -14,7 +14,6 @@ const M = {
       "SHADOW_TOGGLED",
       "THEME",
       "TITLEBAR",
-      "TITLEBAR_TITLE",
       "VERTICAL_PADDING"
     ].reduce((obj, v, i) => {
       obj[v] = i + 1;

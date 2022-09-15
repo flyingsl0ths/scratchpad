@@ -9,8 +9,6 @@ import CodeWindowEvents from "./CodeWindowEvents";
 
 import "./css/index.css";
 
-import EditorConstants from "./EditorConstants";
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,11 +19,10 @@ export default class App extends React.Component {
       editorFont: "Fira code",
       editorFontSize: 20,
       editorLanguage: "javascript",
-      editorLineHeight: 1,
+      editorLineHeight: 1.2,
       editorTheme: defaultTheme,
       showLineNumbers: true,
       showWindowDropShadow: true,
-      titlbarTitle: "HelloWorld.js",
       titlebarTheme: "macos",
       windowBgColor: "#1565c0",
       windowDropShadowAlpha: 20,
@@ -46,14 +43,11 @@ export default class App extends React.Component {
         <HBox centered={true}>
           <h1 id="header">Scratchpad</h1>
           <a
+            id="project-link"
             href="https://github.com/flyingsl0ths/scratchpad"
             target="_blank"
             rel="noopener noreferrer">
-            <img
-              src="/github.svg"
-              alt="Github logo"
-              style={{ marginTop: "0.5em" }}
-            />
+            <img src="/github.svg" alt="Github logo" />
           </a>
         </HBox>
 
@@ -73,7 +67,6 @@ export default class App extends React.Component {
           showDropShadow={this.state.showWindowDropShadow}
           showEditorLineNumbers={this.state.showLineNumbers}
           titlebarTheme={this.state.titlebarTheme}
-          titlebarTitle={this.state.titlbarTitle}
           windowBgColor={this.state.windowBgColor}
           windowPadding={{
             x: this.state.windowPaddingH,
@@ -126,23 +119,25 @@ export default class App extends React.Component {
 
     let field;
 
-    const onTitleBarTitleChanged = () => {
-      console.log(value);
-      if (value && value.length > EditorConstants.MAX_TITLEBAR_LENGTH) {
-        value =
-          value.slice(0, value.length - EditorConstants.MAX_TITLEBAR_LENGTH) +
-          "...";
-      }
-      return "titlbarTitle";
-    };
-
     switch (change) {
-      case CODE_WINDOW_CHANGES.LANGUAGE:
-        this.handleLanguageChange(value);
-        return;
       case CODE_WINDOW_CHANGES.THEME:
         this.handleThemeChange(value);
         return;
+      case CODE_WINDOW_CHANGES.LANGUAGE:
+        this.handleLanguageChange(value);
+        return;
+      case CODE_WINDOW_CHANGES.EDITOR_FONT_CHANGED:
+        field = "editorFont";
+        break;
+      case CODE_WINDOW_CHANGES.BG_COLOR:
+        field = "windowBgColor";
+        break;
+      case CODE_WINDOW_CHANGES.TITLEBAR:
+        field = "titlebarTheme";
+        break;
+      case CODE_WINDOW_CHANGES.EDITOR_FONT_SIZE_INCREASED:
+        field = "editorFontSize";
+        break;
       case CODE_WINDOW_CHANGES.VERTICAL_PADDING:
         field = "windowPaddingV";
         break;
@@ -167,22 +162,6 @@ export default class App extends React.Component {
       case CODE_WINDOW_CHANGES.EDITOR_LINES_TOGGLED:
         field = "showLineNumbers";
         break;
-      case CODE_WINDOW_CHANGES.EDITOR_FONT_SIZE_INCREASED:
-        field = "editorFontSize";
-        break;
-      case CODE_WINDOW_CHANGES.TITLEBAR:
-        field = "titlebarTheme";
-        break;
-      case CODE_WINDOW_CHANGES.TITLEBAR_TITLE:
-        field = onTitleBarTitleChanged();
-        break;
-      case CODE_WINDOW_CHANGES.EDITOR_FONT_CHANGED:
-        field = "editorFont";
-        break;
-      case CODE_WINDOW_CHANGES.BG_COLOR:
-        field = "windowBgColor";
-        break;
-
       default:
         console.error("Unexpected change!:\n", value);
         return;

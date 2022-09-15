@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 import { HBox } from "./Containers.js";
 
 TitleBar.propTypes = {
-  theme: PropTypes.string.isRequired,
-  title: PropTypes.string
+  theme: PropTypes.string.isRequired
 };
 
 TitlebarItem.propTypes = {
@@ -15,8 +14,8 @@ TitlebarItem.propTypes = {
 
 export default function TitleBar(props) {
   return (
-    <HBox className={props.theme} centered={false}>
-      {computeThemeProps(props.theme, props.title)}
+    <HBox className={props.theme} centered={true}>
+      {computeThemeProps(props.theme)}
     </HBox>
   );
 }
@@ -26,22 +25,16 @@ function TitlebarItem(props) {
   return <div className={className}></div>;
 }
 
-function computeThemeProps(theme, title) {
+function computeThemeProps(theme) {
   let result;
   if (theme.includes("macos")) {
     result = [
       <TitlebarItem key={1} className="circle" color="red" />,
       <TitlebarItem key={2} className="circle" color="yellow" />,
-      <TitlebarItem key={3} className="circle" color="green" />,
-      <h4 key={4} className="m-l fw-n">
-        {title}
-      </h4>
+      <TitlebarItem key={3} className="circle" color="green" />
     ];
   } else if (theme.includes("windows")) {
     result = [
-      <h4 key={1} className="m-r fw-n">
-        {title}
-      </h4>,
       <TitlebarItem key={2} className="underscore" />,
       <TitlebarItem key={3} className="square" />,
       <TitlebarItem key={4} className="letter-x" />
