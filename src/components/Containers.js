@@ -75,7 +75,6 @@ export function HBox(props) {
 
 function forwardEvent(event, props, [firstFilter, secondFilter, thirdFilter]) {
   const target = event.target;
-  console.log(target.classList);
   if (
     !(
       target.classList.contains(firstFilter) ||
