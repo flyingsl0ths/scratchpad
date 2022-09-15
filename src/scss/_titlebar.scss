@@ -63,24 +63,6 @@ $gray: #222629;
   #tb-title {
     font-size: 1.54vw;
   }
-  .circle {
-    padding: 0.35em;
-  }
-}
-
-@media (max-width: 821px) {
-  .square {
-    font-size: 1.2vw;
-    border: 1px solid $gray;
-  }
-
-  .letter-x::before {
-    font-size: 1.2vw;
-  }
-
-  .underscore::before {
-    font-size: 1.2vw;
-  }
 }
 
 @media (max-width: 414px) {
