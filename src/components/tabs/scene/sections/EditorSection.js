@@ -27,8 +27,7 @@ EditorFontOptions.propTypes = {
 };
 
 export default function EditorSection(props) {
-  const { CODE_WINDOW_CHANGES, withEventChange: withEventChange } =
-    CodeWindowEvents;
+  const { CODE_WINDOW_CHANGES, withEventChange } = CodeWindowEvents;
 
   return (
     <Section title="Editor" icon={<EditorIcon />}>
