@@ -19,6 +19,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "react-simple-code-editor": "^0.13.0",
+    "sass": "^1.54.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -53,7 +54,6 @@
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.1",
-    "prettier": "^2.7.1",
-    "sass": "^1.54.9"
+    "prettier": "^2.7.1"
   }
 }
