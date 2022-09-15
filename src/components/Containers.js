@@ -19,11 +19,21 @@ VBox.propTypes = {
 
 export function VBox(props) {
   const { className = " " } = props;
-  return (
+  return props.handleOnClick ? (
     <div
-      onClick={event =>
-        forwardEvent(event, props, ["vbox", "cvbox", className])
+      onClick={event => {
+        forwardEvent(event, props, ["vbox", "cvbox", className]);
+      }}
+      id={props.id}
+      style={props.style}
+      className={`${props.centered ? "cvbox" : "vbox"} ${className}`}>
+      {
+        // eslint-disable-next-line react/prop-types
+        props.children
       }
+    </div>
+  ) : (
+    <div
       id={props.id}
       style={props.style}
       className={`${props.centered ? "cvbox" : "vbox"} ${className}`}>
@@ -37,11 +47,21 @@ export function VBox(props) {
 
 export function HBox(props) {
   const { className = " " } = props;
-  return (
+  return props.handleOnClick ? (
     <div
-      onClick={event =>
-        forwardEvent(event, props, ["hbox", "chbox", className])
+      onClick={event => {
+        forwardEvent(event, props, ["hbox", "chbox", className]);
+      }}
+      id={props.id}
+      style={props.style}
+      className={`${props.centered ? "chbox" : "hbox"} ${className}`}>
+      {
+        // eslint-disable-next-line react/prop-types
+        props.children
       }
+    </div>
+  ) : (
+    <div
       id={props.id}
       style={props.style}
       className={`${props.centered ? "chbox" : "hbox"} ${className}`}>
@@ -53,11 +73,15 @@ export function HBox(props) {
   );
 }
 
-function forwardEvent(event, props, filters) {
+function forwardEvent(event, props, [firstFilter, secondFilter, thirdFilter]) {
   const target = event.target;
+  console.log(target.classList);
   if (
-    props.handleOnClick &&
-    filters.filter(f => target.classList.contains(f)).length === 0
+    !(
+      target.classList.contains(firstFilter) ||
+      target.classList.contains(secondFilter) ||
+      target.classList.contains(thirdFilter)
+    )
   ) {
     props.handleOnClick(event);
   }
