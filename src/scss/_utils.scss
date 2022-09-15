@@ -41,23 +41,3 @@
 .yellow {
   background-color: #ffce54;
 }
-
-.m-l {
-  margin-left: 21.5vw;
-}
-
-.m-r {
-  margin-right: 21.5vw;
-}
-
-@media (max-width: 820px) {
-  .m-l {
-    margin-left: 12.5vw;
-  }
-  .m-r {
-    margin-right: 12.5vw;
-  }
-  .circle {
-    padding: 0.4em;
-  }
-}
