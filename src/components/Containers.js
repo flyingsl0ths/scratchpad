@@ -57,7 +57,7 @@ function forwardEvent(event, props, filters) {
   const target = event.target;
   if (
     props.handleOnClick &&
-    filters.filter(f => target.classList.contains(f)).length == 0
+    filters.filter(f => target.classList.contains(f)).length === 0
   ) {
     props.handleOnClick(event);
   }
