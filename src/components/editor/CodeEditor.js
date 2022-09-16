@@ -56,6 +56,7 @@ export default function CodeEditor(props) {
         highlight={code =>
           hljs.highlight(code, { language: props.language }).value
         }
+        style={{ width: "100%", height: "100%" }}
       />
     </HBox>
   );
