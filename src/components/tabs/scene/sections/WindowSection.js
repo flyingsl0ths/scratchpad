@@ -48,8 +48,7 @@ ColorPicker.propTypes = {
 };
 
 export default function WindowSection(props) {
-  const { CODE_WINDOW_CHANGES, withEventChange: withEventChange } =
-    CodeWindowChanges;
+  const { CODE_WINDOW_CHANGES, withEventChange } = CodeWindowChanges;
 
   return (
     <Section title="Window" icon={<WebAssetIcon />}>
