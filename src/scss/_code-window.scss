@@ -1,5 +1,4 @@
 #code-window {
-  width: 62.5vw;
   border-radius: 4px;
 }
 
@@ -18,10 +17,4 @@
   list-style: none;
   user-select: none;
   padding: 0 1em 0 0;
-}
-
-@media (max-width: 414px) {
-  #code-window {
-    width: 90vw;
-  }
 }
