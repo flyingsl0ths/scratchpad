@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import ScreenshotMonitor from "@mui/icons-material/ScreenshotMonitor";
 import TextField from "@mui/material/TextField";
-import domtoimage from "dom-to-image";
+import * as htmlToImage from "html-to-image";
 import download from "downloadjs";
 
 import { VBox, HBox } from "./Containers";
@@ -34,7 +34,7 @@ export default class Screenshot extends React.Component {
     };
 
     const downloadMethod = capitalize(this.state.fileExtension);
-    domtoimage[`to${downloadMethod}`](
+    htmlToImage[`to${downloadMethod}`](
       document.getElementById("code-window-bg")
     ).then(onDownload);
   };
