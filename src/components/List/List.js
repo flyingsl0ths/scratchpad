@@ -1,8 +1,9 @@
 import React from "react";
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
+import "./List.scss";
 
-import { VBox, HBox } from "../Containers";
+import { VBox, HBox } from "../Container/Container";
 
 List.propTypes = {
   children: PropTypes.array.isRequired,

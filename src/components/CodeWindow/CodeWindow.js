@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./CodeWindow.scss";
 
-import TitleBar from "../TitleBar";
-import { VBox } from "../Containers";
-import CodeEditor from "./CodeEditor";
+import TitleBar from "../TitleBar/TitleBar";
+import { VBox } from "../Container/Container";
+import CodeEditor from "../CodeEditor/CodeEditor";
 
 CodeWindow.propTypes = {
   dropShadowAlpha: PropTypes.number.isRequired,

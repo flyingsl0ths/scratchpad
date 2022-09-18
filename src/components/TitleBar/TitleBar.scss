@@ -21,7 +21,7 @@ $gray: #222629;
 .macos {
   @include titlebar;
   padding: 0 0 0 0.5em;
-  justify-content: flex-start;
+  justify-content: flex-start !important;
 }
 
 .windows {

@@ -6,10 +6,10 @@ import PropTypes from "prop-types";
 
 import CodeWindowEvents from "../../../../CodeWindowEvents";
 import Section from "./Section";
-import Selection from "../../../Selection";
+import Selection from "../../../Selection/Selection";
 import SettingAccordion from "../SettingAccordion";
-import { VBox } from "../../../Containers";
-import Spacer from "../../../Spacer";
+import { VBox } from "../../../Container/Container";
+import Spacer from "../../../Spacer/Spacer";
 import LabeledSlider from "../LabeledSlider";
 
 EditorSection.propTypes = {

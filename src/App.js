@@ -1,10 +1,10 @@
 import React from "react";
 
-import { HBox, VBox } from "./components/Containers";
-import CodeWindow from "./components/editor";
-import Spacer from "./components/Spacer";
+import { HBox, VBox } from "./components/Container/Container";
+import CodeWindow from "./components/CodeWindow/CodeWindow";
+import Spacer from "./components/Spacer/Spacer";
 import SettingsTabs from "./components/tabs";
-import Screenshot from "./components/Screenshot";
+import Screenshot from "./components/Screenshot/Screenshot";
 import CodeWindowEvents from "./CodeWindowEvents";
 
 import "./css/index.css";

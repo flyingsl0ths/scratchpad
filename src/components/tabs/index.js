@@ -6,7 +6,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import WindowIcon from "@mui/icons-material/Window";
 import PropTypes from "prop-types";
 
-import { VBox } from "../Containers";
+import { VBox } from "../Container/Container";
 import ThemeTab from "./Theme";
 import LanguageTab from "./Language";
 import SceneTab from "./scene";

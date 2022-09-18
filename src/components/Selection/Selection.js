@@ -4,6 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import PropTypes from "prop-types";
+import "./Selection.scss";
 
 export default class Selection extends React.Component {
   static propTypes = {

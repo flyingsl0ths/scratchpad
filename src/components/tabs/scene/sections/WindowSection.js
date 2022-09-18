@@ -7,12 +7,12 @@ import { HexColorPicker } from "react-colorful";
 import PropTypes from "prop-types";
 
 import SettingAccordion from "../SettingAccordion";
-import { HBox, VBox } from "../../../Containers";
-import { List } from "../../../list";
+import { HBox, VBox } from "../../../Container/Container";
+import { List } from "../../../List/List";
 import Section from "./Section";
 import LabeledSlider from "../LabeledSlider";
-import TitleBar from "../../../TitleBar";
-import Spacer from "../../../Spacer";
+import TitleBar from "../../../TitleBar/TitleBar";
+import Spacer from "../../../Spacer/Spacer";
 import CodeWindowChanges from "../../../../CodeWindowEvents";
 
 WindowSection.propTypes = {

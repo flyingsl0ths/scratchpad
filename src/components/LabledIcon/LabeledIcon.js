@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./LabeledIcon.scss";
 
-import { HBox } from "./Containers";
+import { HBox } from "../Container/Container";
 
 LabeledIcon.propTypes = {
   id: PropTypes.string,

@@ -2,8 +2,9 @@ import React from "react";
 import Editor from "react-simple-code-editor";
 import PropTypes from "prop-types";
 import hljs from "highlight.js";
+import "./CodeEditor.scss";
 
-import { HBox, VBox } from "../Containers";
+import { HBox, VBox } from "../Container/Container";
 
 Lines.propTypes = {
   lineCount: PropTypes.number.isRequired
