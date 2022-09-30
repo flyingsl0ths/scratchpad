@@ -1,4 +1,4 @@
-const EditorConstants = {
+const M = {
   THEME_NAMES: Object.freeze([
     "default",
     "dark",
@@ -104,4 +104,4 @@ const EditorConstants = {
   ])
 };
 
-export default EditorConstants;
+export default M;
