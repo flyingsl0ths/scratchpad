@@ -47,7 +47,7 @@ export default class App extends React.Component {
             href="https://github.com/flyingsl0ths/scratchpad"
             target="_blank"
             rel="noopener noreferrer">
-            <img src="/github.svg" alt="Github logo" />
+            <img src="/github.png" alt="Github logo" />
           </a>
         </HBox>
 
