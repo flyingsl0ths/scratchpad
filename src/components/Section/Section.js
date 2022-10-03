@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { VBox } from "../../../Container/Container";
-import LabeledIcon from "../../../LabledIcon/LabeledIcon";
-import Spacer from "../../../Spacer/Spacer";
+import { VBox } from "../Container/Container";
+import LabeledIcon from "../LabledIcon/LabeledIcon";
+import Spacer from "../Spacer/Spacer";
 
 Section.propTypes = {
   icon: PropTypes.element.isRequired,

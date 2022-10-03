@@ -5,8 +5,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 
-import { VBox } from "../../Container/Container";
-import Spacer from "../../Spacer/Spacer";
+import { VBox } from "../Container/Container";
+import Spacer from "../Spacer/Spacer";
 
 SettingAccordion.propTypes = {
   subTitle: PropTypes.string.isRequired,
