@@ -3,12 +3,12 @@
 }
 
 .settings-title {
-  font-size: 1.2vw;
+  font-size: 1.1vw;
   font-weight: 500;
 }
 
 @mixin small-text {
-  font-size: 0.9vw;
+  font-size: 0.95vw;
   font-weight: 400;
 }
 
@@ -19,36 +19,37 @@
 
 .rounded-border {
   margin: 1em;
-  width: 13%;
+  width: 15%;
   border-radius: 4px;
   padding-bottom: 2em;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-@media (max-width: 921px) {
+@media (max-width: 914px) {
+  .settings-sub-title {
+    font-size: 2vw;
+  }
+
+  .settings-title {
+    font-size: 2.8vw;
+  }
   .rounded-border {
-    width: 20%;
+    width: 24%;
   }
 }
 
 @media (max-width: 821px) {
-  .settings-sub-title {
-    font-size: 2.1vw;
-  }
-
-  .settings-title {
-    font-size: 3vw;
-  }
-
   .rounded-border {
     margin: 0.8em;
+    width: 25%;
   }
 }
 
-@media (max-width: 541px) {
+@media (max-width: 614px) {
   .rounded-border {
-    width: 30%;
+    margin: 1em;
+    width: 45%;
   }
 }
 
@@ -62,6 +63,7 @@
   }
 
   .rounded-border {
+    margin: 0.6em;
     width: 50%;
   }
 }
