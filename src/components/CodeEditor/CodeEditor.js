@@ -36,7 +36,7 @@ function Lines(props) {
 
 export default function CodeEditor(props) {
   const [code, setCode] = React.useState(
-    'function doSomething() {\n console.log("Hello!"); \n}'
+    'function doSomething() {           \n console.log("Hello!"); \n}'
   );
 
   return (

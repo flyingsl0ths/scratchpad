@@ -17,7 +17,7 @@ export default class App extends React.Component {
     this.state = {
       editorExtraThemes: [],
       editorFont: "Fira code",
-      editorFontSize: 20,
+      editorFontSize: 21,
       editorLanguage: "javascript",
       editorLineHeight: 1.2,
       editorTheme: defaultTheme,
