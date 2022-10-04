@@ -11,7 +11,7 @@ import ThemeTab from "../ThemeTab/ThemeTab";
 import LanguageTab from "../LanguageTab/LanguageTab";
 import SceneTab from "../SceneTab/SceneTab";
 
-import "./SettingsTab.scss";
+import "./SettingsTabs.scss";
 
 SettingsTabs.propTypes = {
   handleCodeWindowChanges: PropTypes.func.isRequired,
