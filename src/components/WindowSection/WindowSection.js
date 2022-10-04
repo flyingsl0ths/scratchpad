@@ -6,14 +6,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { HexColorPicker } from "react-colorful";
 import PropTypes from "prop-types";
 
-import SettingAccordion from "../SettingAccordion";
-import { HBox, VBox } from "../../../Containers";
-import { List } from "../../../list";
-import Section from "./Section";
-import LabeledSlider from "../LabeledSlider";
-import TitleBar from "../../../TitleBar";
-import Spacer from "../../../Spacer";
-import CodeWindowChanges from "../../../../CodeWindowEvents";
+import SettingAccordion from "../SettingAccordion/SettingAccordion";
+import { HBox, VBox } from "../Container/Container";
+import { List } from "../List/List";
+import Section from "../Section/Section";
+import LabeledSlider from "../LabeledSlider/LabeledSlider";
+import TitleBar from "../TitleBar/TitleBar";
+import Spacer from "../Spacer/Spacer";
+import CodeWindowChanges from "../../CodeWindowEvents";
 
 WindowSection.propTypes = {
   handleSceneChanges: PropTypes.func.isRequired,

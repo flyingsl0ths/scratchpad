@@ -6,10 +6,12 @@ import CodeIcon from "@mui/icons-material/Code";
 import WindowIcon from "@mui/icons-material/Window";
 import PropTypes from "prop-types";
 
-import { VBox } from "../Containers";
-import ThemeTab from "./Theme";
-import LanguageTab from "./Language";
-import SceneTab from "./scene";
+import { VBox } from "../Container/Container";
+import ThemeTab from "../ThemeTab/ThemeTab";
+import LanguageTab from "../LanguageTab/LanguageTab";
+import SceneTab from "../SceneTab/SceneTab";
+
+import "./SettingsTab.scss";
 
 SettingsTabs.propTypes = {
   handleCodeWindowChanges: PropTypes.func.isRequired,

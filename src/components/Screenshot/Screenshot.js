@@ -5,9 +5,9 @@ import TextField from "@mui/material/TextField";
 import * as htmlToImage from "html-to-image";
 import download from "downloadjs";
 
-import { VBox, HBox } from "./Containers";
-import Spacer from "./Spacer";
-import Selection from "./Selection";
+import { VBox, HBox } from "../Container/Container";
+import Spacer from "../Spacer/Spacer";
+import Selection from "../Selection/Selection";
 
 export default class Screenshot extends React.Component {
   static FILE_EXTENSIONS = ["jpeg", "png", "svg"];

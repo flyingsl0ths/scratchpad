@@ -2,12 +2,12 @@ import React from "react";
 import BrushIcon from "@mui/icons-material/Brush";
 import PropTypes from "prop-types";
 
-import { VBox } from "../Containers";
+import { VBox } from "../Container/Container";
 import EditorConstants from "../../EditorConstants";
 import CodeWindowChanges from "../../CodeWindowEvents";
-import Spacer from "../Spacer";
-import LabeledIcon from "../LabeledIcon";
-import { ButtonList } from "../list";
+import Spacer from "../Spacer/Spacer";
+import LabeledIcon from "../LabledIcon/LabeledIcon";
+import { ButtonList } from "../List/List";
 
 ThemeTab.propTypes = {
   selectedTheme: PropTypes.string.isRequired,

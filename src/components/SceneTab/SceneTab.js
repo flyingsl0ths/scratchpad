@@ -2,11 +2,12 @@ import React from "react";
 import MonitorIcon from "@mui/icons-material/Monitor";
 import PropTypes from "prop-types";
 
-import LabeledIcon from "../../LabeledIcon";
-import { VBox } from "../../Containers";
-import Spacer from "../../Spacer";
-import { List } from "../../list";
-import { EditorSection, WindowSection } from "./sections";
+import LabeledIcon from "../LabledIcon/LabeledIcon";
+import { VBox } from "../Container/Container";
+import Spacer from "../Spacer/Spacer";
+import { List } from "../List/List";
+import EditorSection from "../EditorSection/EditorSection";
+import WindowSection from "../WindowSection/WindowSection";
 
 SceneTab.propTypes = {
   handleSceneChanges: PropTypes.func.isRequired,

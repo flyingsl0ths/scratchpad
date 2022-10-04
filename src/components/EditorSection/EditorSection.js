@@ -4,13 +4,13 @@ import { Checkbox } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import PropTypes from "prop-types";
 
-import CodeWindowEvents from "../../../../CodeWindowEvents";
-import Section from "./Section";
-import Selection from "../../../Selection";
-import SettingAccordion from "../SettingAccordion";
-import { VBox } from "../../../Containers";
-import Spacer from "../../../Spacer";
-import LabeledSlider from "../LabeledSlider";
+import CodeWindowEvents from "../../CodeWindowEvents";
+import Section from "../Section/Section";
+import Selection from "../Selection/Selection";
+import SettingAccordion from "../SettingAccordion/SettingAccordion";
+import { VBox } from "../Container/Container";
+import Spacer from "../Spacer/Spacer";
+import LabeledSlider from "../LabeledSlider/LabeledSlider";
 
 EditorSection.propTypes = {
   handleEditorChanges: PropTypes.func.isRequired

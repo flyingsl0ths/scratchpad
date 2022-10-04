@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Slider from "@mui/material/Slider";
 
-import { VBox } from "../../Containers";
-import Spacer from "../../Spacer";
+import { VBox } from "../Container/Container";
+import Spacer from "../Spacer/Spacer";
 
 LabeledSlider.propTypes = {
   label: PropTypes.string.isRequired,

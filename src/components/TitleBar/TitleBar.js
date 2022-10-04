@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { HBox } from "./Containers.js";
+import { HBox } from "../Container/Container";
+import "./TitleBar.scss";
 
 TitleBar.propTypes = {
   theme: PropTypes.string.isRequired

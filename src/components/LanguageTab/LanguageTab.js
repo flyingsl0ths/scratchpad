@@ -2,10 +2,10 @@ import React from "react";
 import DataObjectIcon from "@mui/icons-material/DataObject";
 import PropTypes from "prop-types";
 
-import { VBox } from "../Containers";
-import { ButtonList } from "../list";
-import LabeledIcon from "../LabeledIcon";
-import Spacer from "../Spacer";
+import { VBox } from "../Container/Container";
+import { ButtonList } from "../List/List";
+import LabeledIcon from "../LabledIcon/LabeledIcon";
+import Spacer from "../Spacer/Spacer";
 import CodeWindowChanges from "../../CodeWindowEvents";
 import EditorConstants from "../../EditorConstants";
 

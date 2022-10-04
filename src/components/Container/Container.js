@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import "./Container.scss";
+
 HBox.propTypes = {
   centered: PropTypes.bool.isRequired,
   className: PropTypes.string,
