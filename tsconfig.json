@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/create-react-app/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2021", "dom"],
+    "target": "es2021",
+    "outDir": "build",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true
+  },
+  "include": ["**/**/*.tsx", "*.ts"],
+  "jsx": "react",
+  "importsNotUsedAsValues": "preserve"
+}

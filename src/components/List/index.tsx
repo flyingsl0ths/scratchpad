@@ -1,31 +1,31 @@
 import React from "react";
-import { Button } from "@mui/material";
-import PropTypes from "prop-types";
-import "./List.scss";
+import Button from "@mui/material/Button";
 
-import { VBox, HBox } from "../Container/Container";
+import { MouseEvent } from "../../Utils";
+import { VBox, HBox } from "../Container";
 
-List.propTypes = {
-  children: PropTypes.array.isRequired,
-  handleOnClick: PropTypes.func,
-  id: PropTypes.string,
-  orientation: PropTypes.string.isRequired
-};
+import "./styles.scss";
 
-ButtonList.propTypes = {
-  handleOnClick: PropTypes.func,
-  id: PropTypes.string,
-  labels: PropTypes.array.isRequired,
-  orientation: PropTypes.string.isRequired,
-  selected: PropTypes.string.isRequired
-};
+interface ListProps {
+  children: JSX.Element[];
+  handleOnClick?: MouseEvent<HTMLElement>;
+  id?: string;
+  orientation: string;
+}
 
-export function List(props) {
-  const { id = "" } = props;
+interface ButtonListProps {
+  handleOnClick?: MouseEvent<HTMLElement>;
+  id?: string;
+  labels: readonly string[];
+  orientation: string;
+  selected: string;
+}
+
+export function List(props: ListProps): JSX.Element {
   return props.orientation === "v" ? (
     <VBox
       handleOnClick={props.handleOnClick}
-      id={id}
+      id={props.id}
       className={`${props.orientation}-list`}
       centered={false}>
       {props.children}
@@ -33,7 +33,7 @@ export function List(props) {
   ) : (
     <HBox
       handleOnClick={props.handleOnClick}
-      id={id}
+      id={props.id}
       className={`${props.orientation}-list`}
       centered={false}>
       {props.children}
@@ -41,15 +41,17 @@ export function List(props) {
   );
 }
 
-export function ButtonList(props) {
+export function ButtonList(props: ButtonListProps): JSX.Element {
+  const buttonStyle = {
+    margin: "0.5em auto",
+    padding: "1em",
+    width: "90%"
+  } as const;
+
   const buttons = props.labels.map((label, i) => (
     <Button
       variant={props.selected === label ? "contained" : "outlined"}
-      sx={{
-        margin: "0.5em auto",
-        padding: "1em",
-        width: "90%"
-      }}
+      sx={buttonStyle}
       fullWidth={true}
       key={i}
       size="large"

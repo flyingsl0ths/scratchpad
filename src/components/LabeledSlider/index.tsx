@@ -1,20 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Slider from "@mui/material/Slider";
 
-import { VBox } from "../Container/Container";
-import Spacer from "../Spacer/Spacer";
+import { VBox } from "../Container";
+import Spacer from "../Spacer";
 
-LabeledSlider.propTypes = {
-  label: PropTypes.string.isRequired,
-  step: PropTypes.number.isRequired,
-  min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
-  defaultValue: PropTypes.number.isRequired,
-  handleChange: PropTypes.func
-};
+interface LabeledSliderProps {
+  defaultValue: number;
+  handleChange: (value: number) => void;
+  label: string;
+  max: number;
+  min: number;
+  step: number;
+}
 
-export default function LabeledSlider(props) {
+export default function LabeledSlider(props: LabeledSliderProps): JSX.Element {
   return (
     <VBox centered={false}>
       <h4 className="fw-n">{props.label}</h4>
@@ -27,7 +26,7 @@ export default function LabeledSlider(props) {
           defaultValue={props.defaultValue}
           aria-label="Default"
           valueLabelDisplay="auto"
-          onChange={(_, value) => props.handleChange(value)}
+          onChange={(_, value) => props.handleChange(value as number)}
         />
       ) : (
         <Slider

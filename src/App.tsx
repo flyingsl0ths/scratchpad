@@ -1,17 +1,44 @@
 import React from "react";
 
-import { HBox, VBox } from "./components/Container/Container";
-import CodeWindow from "./components/CodeWindow/CodeWindow";
-import Spacer from "./components/Spacer/Spacer";
-import SettingsTabs from "./components/SettingsTabs/SettingsTabs";
-import Screenshot from "./components/Screenshot/Screenshot";
-import CodeWindowEvents from "./CodeWindowEvents";
+import { HBox, VBox } from "./components/Container";
+import CodeWindow from "./components/CodeWindow";
+import Spacer from "./components/Spacer";
+import SettingsTabs from "./components/SettingsTabs";
+import ImageLink from "./components/ImageLink";
+import Screenshot from "./components/Screenshot";
+import { CodeWindowEvents } from "./CodeWindowEvents";
 
-import "./css/index.css";
+import { Primitive } from "./Utils";
 
-export default class App extends React.Component {
-  constructor(props) {
+import "./scss/index.scss";
+
+interface AppState {
+  editorExtraThemes: string[];
+  editorFont: string;
+  editorFontSize: number;
+  editorLanguage: string;
+  editorLineHeight: number;
+  editorTheme: string;
+  showLineNumbers: boolean;
+  showWindowDropShadow: boolean;
+  titlebarTheme: string;
+  windowBgColor: string;
+  windowDropShadowAlpha: number;
+  windowDropShadowOffsetX: number;
+  windowDropShadowOffsetY: number;
+  windowPaddingH: number;
+  windowPaddingV: number;
+}
+
+export default class App extends React.Component<
+  Record<string, unknown>,
+  AppState
+> {
+  private screenshotTarget: React.RefObject<HTMLElement>;
+
+  constructor(props: Record<string, unknown>) {
     super(props);
+
     const defaultTheme = "default";
 
     this.state = {
@@ -33,6 +60,8 @@ export default class App extends React.Component {
     };
 
     updateTheme(defaultTheme);
+
+    this.screenshotTarget = React.createRef();
   }
 
   render() {
@@ -42,13 +71,12 @@ export default class App extends React.Component {
       <VBox centered={true}>
         <HBox centered={true}>
           <h1 id="header">Scratchpad</h1>
-          <a
+          <ImageLink
             id="project-link"
-            href="https://github.com/flyingsl0ths/scratchpad"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img src="/github.png" alt="Github logo" />
-          </a>
+            url="https://github.com/flyingsl0ths/scratchpad"
+            image="/github.png"
+            imageDescription="Github logo"
+          />
         </HBox>
 
         <Spacer amount={spacerAmount} />
@@ -72,12 +100,11 @@ export default class App extends React.Component {
             x: this.state.windowPaddingH,
             y: this.state.windowPaddingV
           }}
-          handleCodeChange={() => {}}
         />
 
         <Spacer amount={spacerAmount} />
 
-        <Screenshot />
+        <Screenshot targetId="code-window-bg" />
 
         <Spacer amount={spacerAmount} />
 
@@ -91,14 +118,14 @@ export default class App extends React.Component {
     );
   }
 
-  handleLanguageChange = newLanguage => {
+  handleLanguageChange = (newLanguage: string) => {
     newLanguage = newLanguage.toLowerCase();
     if (this.state.editorLanguage !== newLanguage) {
       this.setState({ editorLanguage: newLanguage });
     }
   };
 
-  handleThemeChange = theme => {
+  handleThemeChange = (theme: string) => {
     theme = theme.toLowerCase();
 
     const updatedTheme = theme.slice().replace(/\s/g, "-");
@@ -114,64 +141,58 @@ export default class App extends React.Component {
     });
   };
 
-  handleChanges = (change, value) => {
-    const { CODE_WINDOW_CHANGES } = CodeWindowEvents;
-
-    let field;
-
+  handleChanges = (change: CodeWindowEvents, value: Primitive) => {
     switch (change) {
-      case CODE_WINDOW_CHANGES.THEME:
-        this.handleThemeChange(value);
+      case CodeWindowEvents.THEME:
+        this.handleThemeChange(value as string);
         return;
-      case CODE_WINDOW_CHANGES.LANGUAGE:
-        this.handleLanguageChange(value);
+      case CodeWindowEvents.LANGUAGE:
+        this.handleLanguageChange(value as string);
         return;
-      case CODE_WINDOW_CHANGES.EDITOR_FONT_CHANGED:
-        field = "editorFont";
+      case CodeWindowEvents.EDITOR_FONT_CHANGED:
+        this.setState({ editorFont: value as string });
         break;
-      case CODE_WINDOW_CHANGES.BG_COLOR:
-        field = "windowBgColor";
+      case CodeWindowEvents.BG_COLOR:
+        this.setState({ windowBgColor: value as string });
         break;
-      case CODE_WINDOW_CHANGES.TITLEBAR:
-        field = "titlebarTheme";
+      case CodeWindowEvents.TITLEBAR:
+        this.setState({ titlebarTheme: value as string });
         break;
-      case CODE_WINDOW_CHANGES.EDITOR_FONT_SIZE_INCREASED:
-        field = "editorFontSize";
+      case CodeWindowEvents.EDITOR_FONT_SIZE_INCREASED:
+        this.setState({ editorFontSize: value as number });
         break;
-      case CODE_WINDOW_CHANGES.VERTICAL_PADDING:
-        field = "windowPaddingV";
+      case CodeWindowEvents.VERTICAL_PADDING:
+        this.setState({ windowPaddingV: value as number });
         break;
-      case CODE_WINDOW_CHANGES.HORIZONTAL_PADDING:
-        field = "windowPaddingH";
+      case CodeWindowEvents.HORIZONTAL_PADDING:
+        this.setState({ windowPaddingH: value as number });
         break;
-      case CODE_WINDOW_CHANGES.SHADOW_OFFSET_X:
-        field = "windowDropShadowOffsetX";
+      case CodeWindowEvents.SHADOW_OFFSET_X:
+        this.setState({ windowDropShadowOffsetY: value as number });
         break;
-      case CODE_WINDOW_CHANGES.SHADOW_OFFSET_Y:
-        field = "windowDropShadowOffsetY";
+      case CodeWindowEvents.SHADOW_OFFSET_Y:
+        this.setState({ windowDropShadowOffsetX: value as number });
         break;
-      case CODE_WINDOW_CHANGES.SHADOW_ALPHA:
-        field = "windowDropShadowAlpha";
+      case CodeWindowEvents.SHADOW_ALPHA:
+        this.setState({ windowDropShadowAlpha: value as number });
         break;
-      case CODE_WINDOW_CHANGES.SHADOW_TOGGLED:
-        field = "showWindowDropShadow";
+      case CodeWindowEvents.SHADOW_TOGGLED:
+        this.setState({ showWindowDropShadow: value as boolean });
         break;
-      case CODE_WINDOW_CHANGES.EDITOR_LINES_INCREASED:
-        field = "editorLineHeight";
+      case CodeWindowEvents.EDITOR_LINES_INCREASED:
+        this.setState({ editorLineHeight: value as number });
         break;
-      case CODE_WINDOW_CHANGES.EDITOR_LINES_TOGGLED:
-        field = "showLineNumbers";
+      case CodeWindowEvents.EDITOR_LINES_TOGGLED:
+        this.setState({ showLineNumbers: value as boolean });
         break;
       default:
         console.error("Unexpected change!:\n", value);
         return;
     }
-
-    this.setState({ [field]: value });
   };
 }
 
-function updateTheme(theme) {
+function updateTheme(theme: string) {
   document.head.querySelectorAll("link").forEach(link => {
     if (link.dataset.id === "editor-theme") {
       link.remove();
@@ -183,7 +204,6 @@ function updateTheme(theme) {
   style.dataset.id = "editor-theme";
   style.href = `/styles/${theme}.css`;
   style.rel = "stylesheet";
-  style.async = true;
 
   document.head.appendChild(style);
 }

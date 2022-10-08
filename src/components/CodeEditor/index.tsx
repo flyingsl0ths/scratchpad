@@ -1,27 +1,26 @@
 import React from "react";
 import Editor from "react-simple-code-editor";
-import PropTypes from "prop-types";
 import hljs from "highlight.js";
-import "./CodeEditor.scss";
 
-import { HBox, VBox } from "../Container/Container";
+import { HBox, VBox } from "../Container";
 
-Lines.propTypes = {
-  lineCount: PropTypes.number.isRequired
-};
+import "./styles.scss";
 
-CodeEditor.propTypes = {
-  fontFamily: PropTypes.string.isRequired,
-  fontSize: PropTypes.number.isRequired,
-  handleCodeChange: PropTypes.func.isRequired,
-  language: PropTypes.string.isRequired,
-  lineHeight: PropTypes.number.isRequired,
-  showLines: PropTypes.bool.isRequired,
-  theme: PropTypes.string.isRequired
-};
+interface EditorLineProps {
+  lineCount: number;
+}
 
-function Lines(props) {
-  const lines = [];
+interface CodeEditorProps {
+  fontFamily: string;
+  fontSize: number;
+  language: string;
+  lineHeight: number;
+  showLines: boolean;
+  theme: string;
+}
+
+function Lines(props: EditorLineProps): JSX.Element {
+  const lines: JSX.Element[] = [];
 
   for (let i = 0, total = props.lineCount; i < total; ++i) {
     lines.push(<li key={i}>{i + 1}</li>);
@@ -34,12 +33,12 @@ function Lines(props) {
   );
 }
 
-export default function CodeEditor(props) {
+export default function CodeEditor(props: CodeEditorProps): JSX.Element {
   const [code, setCode] = React.useState(
     'function doSomething() {           \n console.log("Hello!"); \n}'
   );
 
-  return (
+  return props.showLines ? (
     <HBox
       id="editor"
       className="hljs"
@@ -49,8 +48,27 @@ export default function CodeEditor(props) {
         fontFamily: `"${props.fontFamily}"`
       }}
       centered={false}>
-      {props.showLines && <Lines lineCount={computeCodeLines(code)} />}
+      <Lines lineCount={computeCodeLines(code)} />
 
+      <Editor
+        value={code}
+        onValueChange={setCode}
+        highlight={code =>
+          hljs.highlight(code, { language: props.language }).value
+        }
+        style={{ width: "100%", height: "100%" }}
+      />
+    </HBox>
+  ) : (
+    <HBox
+      id="editor"
+      className="hljs"
+      style={{
+        fontSize: `${props.fontSize}px`,
+        lineHeight: props.lineHeight,
+        fontFamily: `"${props.fontFamily}"`
+      }}
+      centered={false}>
       <Editor
         value={code}
         onValueChange={setCode}
@@ -63,7 +81,7 @@ export default function CodeEditor(props) {
   );
 }
 
-function computeCodeLines(code) {
+function computeCodeLines(code: string): number {
   if (code === "") {
     return 1;
   }

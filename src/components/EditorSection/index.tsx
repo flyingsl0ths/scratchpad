@@ -2,33 +2,36 @@ import React from "react";
 import EditorIcon from "@mui/icons-material/Wysiwyg";
 import { Checkbox } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import PropTypes from "prop-types";
 
-import CodeWindowEvents from "../../CodeWindowEvents";
-import Section from "../Section/Section";
-import Selection from "../Selection/Selection";
-import SettingAccordion from "../SettingAccordion/SettingAccordion";
-import { VBox } from "../Container/Container";
-import Spacer from "../Spacer/Spacer";
-import LabeledSlider from "../LabeledSlider/LabeledSlider";
+import {
+  CodeWindowEvents,
+  EventChange,
+  withEventChange,
+  CodeWindowChange
+} from "../../CodeWindowEvents";
+import { FONTS } from "../../EditorConstants";
+import Section from "../Section";
+import Selection from "../Selection";
+import SettingAccordion from "../SettingAccordion";
+import { VBox } from "../Container";
+import Spacer from "../Spacer";
+import LabeledSlider from "../LabeledSlider";
 
-EditorSection.propTypes = {
-  handleEditorChanges: PropTypes.func.isRequired
-};
+interface EditorSectionProps {
+  handleEditorChanges: CodeWindowChange;
+}
 
-EditorLinesOptions.propTypes = {
-  handleEditorLinesChanged: PropTypes.func.isRequired,
-  handleEditorLinesToggled: PropTypes.func.isRequired
-};
+interface EditorLinesOptionsProps {
+  handleEditorLinesChanged: EventChange<number>;
+  handleEditorLinesToggled: EventChange<boolean>;
+}
 
-EditorFontOptions.propTypes = {
-  handleEditorFontSizeChanged: PropTypes.func.isRequired,
-  handleEditorFontChanged: PropTypes.func.isRequired
-};
+interface EditorFontOptionsProps {
+  handleEditorFontChanged: EventChange<string>;
+  handleEditorFontSizeChanged: EventChange<number>;
+}
 
-export default function EditorSection(props) {
-  const { CODE_WINDOW_CHANGES, withEventChange } = CodeWindowEvents;
-
+export default function EditorSection(props: EditorSectionProps): JSX.Element {
   return (
     <Section title="Editor" icon={<EditorIcon />}>
       <SettingAccordion
@@ -36,11 +39,11 @@ export default function EditorSection(props) {
         subTitle="Adjust the editor's font settings">
         <EditorFontOptions
           handleEditorFontChanged={withEventChange(
-            CODE_WINDOW_CHANGES.EDITOR_FONT_CHANGED,
+            CodeWindowEvents.EDITOR_FONT_CHANGED,
             props.handleEditorChanges
           )}
           handleEditorFontSizeChanged={withEventChange(
-            CODE_WINDOW_CHANGES.EDITOR_FONT_SIZE_INCREASED,
+            CodeWindowEvents.EDITOR_FONT_SIZE_INCREASED,
             props.handleEditorChanges
           )}
         />
@@ -51,11 +54,11 @@ export default function EditorSection(props) {
         subTitle="Adjust the editor's line settings">
         <EditorLinesOptions
           handleEditorLinesChanged={withEventChange(
-            CODE_WINDOW_CHANGES.EDITOR_LINES_INCREASED,
+            CodeWindowEvents.EDITOR_LINES_INCREASED,
             props.handleEditorChanges
           )}
           handleEditorLinesToggled={withEventChange(
-            CODE_WINDOW_CHANGES.EDITOR_LINES_TOGGLED,
+            CodeWindowEvents.EDITOR_LINES_TOGGLED,
             props.handleEditorChanges
           )}
         />
@@ -64,7 +67,7 @@ export default function EditorSection(props) {
   );
 }
 
-function EditorLinesOptions(props) {
+function EditorLinesOptions(props: EditorLinesOptionsProps): JSX.Element {
   return (
     <VBox className="pd-s" centered={false}>
       <FormControlLabel
@@ -93,16 +96,7 @@ function EditorLinesOptions(props) {
   );
 }
 
-function EditorFontOptions(props) {
-  const fonts = [
-    "Fira Code",
-    "JetBrains Mono",
-    "Source Code Pro",
-    "Space Mono",
-    "Ubuntu Mono",
-    "Anonymous Pro"
-  ];
-
+function EditorFontOptions(props: EditorFontOptionsProps): JSX.Element {
   const spacerAmount = "1em";
 
   return (
@@ -110,8 +104,8 @@ function EditorFontOptions(props) {
       <Selection
         defaultValue={1}
         label="Select a font"
-        values={fonts}
-        onSelectionChanged={(_, font) => props.handleEditorFontChanged(font)}
+        values={FONTS}
+        onSelectionChanged={props.handleEditorFontChanged}
       />
 
       <Spacer amount={spacerAmount} />

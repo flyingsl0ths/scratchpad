@@ -1,19 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Accordion from "@mui/material/Accordion";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 
-import { VBox } from "../Container/Container";
-import Spacer from "../Spacer/Spacer";
+import { VBox } from "../Container";
+import Spacer from "../Spacer";
 
-SettingAccordion.propTypes = {
-  subTitle: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
-};
+interface SettingAccordionProps {
+  children: JSX.Element;
+  subTitle: string;
+  title: string;
+}
 
-export default function SettingAccordion(props) {
+export default function SettingAccordion(
+  props: SettingAccordionProps
+): JSX.Element {
   return (
     <div style={{ margin: "1em 0" }}>
       <Accordion>
@@ -26,12 +28,7 @@ export default function SettingAccordion(props) {
             <h4 className="settings-sub-title">{props.subTitle}</h4>
           </VBox>
         </AccordionSummary>
-        <AccordionDetails>
-          {
-            // eslint-disable-next-line react/prop-types
-            props.children
-          }
-        </AccordionDetails>
+        <AccordionDetails>{props.children}</AccordionDetails>
       </Accordion>
     </div>
   );

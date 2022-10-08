@@ -4,52 +4,55 @@ import WebAssetIcon from "@mui/icons-material/WebAsset";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { HexColorPicker } from "react-colorful";
-import PropTypes from "prop-types";
 
-import SettingAccordion from "../SettingAccordion/SettingAccordion";
-import { HBox, VBox } from "../Container/Container";
-import { List } from "../List/List";
-import Section from "../Section/Section";
-import LabeledSlider from "../LabeledSlider/LabeledSlider";
-import TitleBar from "../TitleBar/TitleBar";
-import Spacer from "../Spacer/Spacer";
-import CodeWindowChanges from "../../CodeWindowEvents";
+import SettingAccordion from "../SettingAccordion";
+import { HBox, VBox } from "../Container";
+import { List } from "../List";
+import Section from "../Section";
+import LabeledSlider from "../LabeledSlider";
+import TitleBar from "../TitleBar";
+import Spacer from "../Spacer";
+import {
+  CodeWindowEvents,
+  withEventChange,
+  EventChange,
+  CodeWindowChange
+} from "../../CodeWindowEvents";
 
-WindowSection.propTypes = {
-  handleSceneChanges: PropTypes.func.isRequired,
-  windowBgColor: PropTypes.string.isRequired
-};
+interface WindowSectionProps {
+  handleSceneChanges: CodeWindowChange;
+  windowBgColor: string;
+}
 
-TitleBarOptions.propTypes = {
-  handleWindowTitleBarChanged: PropTypes.func.isRequired
-};
+interface TitleBarOptionsProps {
+  handleWindowTitleBarChanged: EventChange<string>;
+}
 
-WindowPaddingOptions.propTypes = {
-  handleHPaddingChanged: PropTypes.func.isRequired,
-  handleVPaddingChanged: PropTypes.func.isRequired
-};
+interface WindowPaddingOptionsProps {
+  handleHPaddingChanged: EventChange<number>;
+  handleVPaddingChanged: EventChange<number>;
+}
 
-WindowBackdropOptions.propTypes = {
-  handleWindowShadowXChanged: PropTypes.func.isRequired,
-  handleWindowShadowYChanged: PropTypes.func.isRequired,
-  handleWindowShadowAlphaChanged: PropTypes.func.isRequired,
-  handleWindowShadowToggleChanged: PropTypes.func.isRequired,
-  handleWindowBgColorChanged: PropTypes.func.isRequired,
-  windowBgColor: PropTypes.string.isRequired
-};
+interface WindowBackdropOptionsProps {
+  handleWindowShadowXChanged: EventChange<number>;
+  handleWindowShadowYChanged: EventChange<number>;
+  handleWindowShadowAlphaChanged: EventChange<number>;
+  handleWindowShadowToggleChanged: EventChange<boolean>;
+  handleWindowBgColorChanged: EventChange<string>;
+  windowBgColor: string;
+}
 
-TitlebarThemeContainer.propTypes = {
-  theme: PropTypes.string.isRequired
-};
+interface TitleBarThemeContainerProps {
+  theme: string;
+  handleOnClick: EventChange<string>;
+}
 
-ColorPicker.propTypes = {
-  color: PropTypes.string.isRequired,
-  handleColorChanged: PropTypes.func.isRequired
-};
+interface ColorPickerProps {
+  color: string;
+  handleColorChanged: EventChange<string>;
+}
 
-export default function WindowSection(props) {
-  const { CODE_WINDOW_CHANGES, withEventChange } = CodeWindowChanges;
-
+export default function WindowSection(props: WindowSectionProps): JSX.Element {
   return (
     <Section title="Window" icon={<WebAssetIcon />}>
       <SettingAccordion
@@ -57,7 +60,7 @@ export default function WindowSection(props) {
         subTitle="Adjust the window's titlebar style">
         <TitleBarOptions
           handleWindowTitleBarChanged={withEventChange(
-            CODE_WINDOW_CHANGES.TITLEBAR,
+            CodeWindowEvents.TITLEBAR,
             props.handleSceneChanges
           )}
         />
@@ -68,11 +71,11 @@ export default function WindowSection(props) {
         subTitle="Adjust the window's padding">
         <WindowPaddingOptions
           handleHPaddingChanged={withEventChange(
-            CODE_WINDOW_CHANGES.HORIZONTAL_PADDING,
+            CodeWindowEvents.HORIZONTAL_PADDING,
             props.handleSceneChanges
           )}
           handleVPaddingChanged={withEventChange(
-            CODE_WINDOW_CHANGES.VERTICAL_PADDING,
+            CodeWindowEvents.VERTICAL_PADDING,
             props.handleSceneChanges
           )}
         />
@@ -83,23 +86,23 @@ export default function WindowSection(props) {
         subTitle="Adjust the window's backdrop">
         <WindowBackdropOptions
           handleWindowShadowXChanged={withEventChange(
-            CODE_WINDOW_CHANGES.SHADOW_OFFSET_X,
+            CodeWindowEvents.SHADOW_OFFSET_X,
             props.handleSceneChanges
           )}
           handleWindowShadowYChanged={withEventChange(
-            CODE_WINDOW_CHANGES.SHADOW_OFFSET_Y,
+            CodeWindowEvents.SHADOW_OFFSET_Y,
             props.handleSceneChanges
           )}
           handleWindowShadowAlphaChanged={withEventChange(
-            CODE_WINDOW_CHANGES.SHADOW_ALPHA,
+            CodeWindowEvents.SHADOW_ALPHA,
             props.handleSceneChanges
           )}
           handleWindowShadowToggleChanged={withEventChange(
-            CODE_WINDOW_CHANGES.SHADOW_TOGGLED,
+            CodeWindowEvents.SHADOW_TOGGLED,
             props.handleSceneChanges
           )}
           handleWindowBgColorChanged={withEventChange(
-            CODE_WINDOW_CHANGES.BG_COLOR,
+            CodeWindowEvents.BG_COLOR,
             props.handleSceneChanges
           )}
           windowBgColor={props.windowBgColor}
@@ -109,36 +112,37 @@ export default function WindowSection(props) {
   );
 }
 
-function TitleBarOptions(props) {
+function TitleBarOptions(props: TitleBarOptionsProps): JSX.Element {
   return (
     <VBox centered={false}>
-      <List
-        handleOnClick={event =>
-          props.handleWindowTitleBarChanged(
-            event.target.closest(".rounded-border").dataset.theme
-          )
-        }
-        orientation="h">
-        <TitlebarThemeContainer theme="macos" />
+      <List orientation="h">
+        <TitleBarThemeContainer
+          handleOnClick={props.handleWindowTitleBarChanged}
+          theme="macos"
+        />
 
-        <TitlebarThemeContainer
-          theme="
-        windows"
+        <TitleBarThemeContainer
+          handleOnClick={props.handleWindowTitleBarChanged}
+          theme="windows"
         />
       </List>
     </VBox>
   );
 }
 
-function TitlebarThemeContainer(props) {
+function TitleBarThemeContainer(
+  props: TitleBarThemeContainerProps
+): JSX.Element {
   return (
-    <div data-theme={props.theme} className="rounded-border">
+    <div
+      onClick={() => props.handleOnClick(props.theme)}
+      className="rounded-border">
       <TitleBar theme={props.theme} />
     </div>
   );
 }
 
-function WindowPaddingOptions(props) {
+function WindowPaddingOptions(props: WindowPaddingOptionsProps): JSX.Element {
   return (
     <VBox className="pd-s" centered={false}>
       <LabeledSlider
@@ -162,7 +166,7 @@ function WindowPaddingOptions(props) {
   );
 }
 
-function WindowBackdropOptions(props) {
+function WindowBackdropOptions(props: WindowBackdropOptionsProps): JSX.Element {
   const spacerAmount = "0.7em";
   return (
     <VBox className="pd-s" centered={false}>
@@ -218,7 +222,7 @@ function WindowBackdropOptions(props) {
   );
 }
 
-function ColorPicker(props) {
+function ColorPicker(props: ColorPickerProps): JSX.Element {
   const spacerAmount = "0.7em";
   return (
     <VBox centered={false}>
