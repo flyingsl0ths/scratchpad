@@ -7,7 +7,7 @@ import SettingsTabs from "./components/SettingsTabs";
 import ImageLink from "./components/ImageLink";
 import Screenshot from "./components/Screenshot";
 import { CodeWindowEvents } from "./CodeWindowEvents";
-
+import { THEMES } from "./EditorConstants";
 import { Primitive } from "./Utils";
 
 import "./scss/index.scss";
@@ -37,7 +37,7 @@ export default class App extends React.Component<
   constructor(props: Record<string, unknown>) {
     super(props);
 
-    const defaultTheme = "default";
+    const defaultTheme = THEMES[0];
 
     this.state = {
       editorExtraThemes: [],
