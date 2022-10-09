@@ -34,8 +34,6 @@ export default class App extends React.Component<
   Record<string, unknown>,
   AppState
 > {
-  private screenshotTarget: React.RefObject<HTMLElement>;
-
   constructor(props: Record<string, unknown>) {
     super(props);
 
@@ -60,8 +58,6 @@ export default class App extends React.Component<
     };
 
     updateTheme(defaultTheme);
-
-    this.screenshotTarget = React.createRef();
   }
 
   render() {
