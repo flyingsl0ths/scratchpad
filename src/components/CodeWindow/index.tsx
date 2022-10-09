@@ -23,10 +23,7 @@ interface CodeWindowProps {
   windowPadding: Offset;
 }
 
-export default function CodeWindow(
-  props: CodeWindowProps,
-  ref: React.ForwardedRef<HTMLElement>
-): JSX.Element {
+export default function CodeWindow(props: CodeWindowProps): JSX.Element {
   const windowStyle = props.showDropShadow
     ? {
         boxShadow: `${props.dropShadowOffsets.x}px ${
