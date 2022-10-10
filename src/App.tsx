@@ -19,6 +19,7 @@ interface AppState {
   editorLanguage: string;
   editorLineHeight: number;
   editorTheme: string;
+  fileName: string;
   showLineNumbers: boolean;
   showWindowDropShadow: boolean;
   titlebarTheme: string;
@@ -46,6 +47,7 @@ export default class App extends React.Component<
       editorLanguage: "javascript",
       editorLineHeight: 1.2,
       editorTheme: defaultTheme,
+      fileName: "",
       showLineNumbers: true,
       showWindowDropShadow: true,
       titlebarTheme: "macos",
@@ -58,6 +60,12 @@ export default class App extends React.Component<
     };
 
     updateTheme(defaultTheme);
+    this.onFileNameChangeHandler = this.onFileNameChangeHandler.bind(this);
+  }
+
+  onFileNameChangeHandler(event: React.ChangeEvent<HTMLInputElement>): void {
+    console.debug(`File Name: ${event.target.value}`);
+    this.setState({ fileName: event.target.value });
   }
 
   render() {
@@ -88,6 +96,7 @@ export default class App extends React.Component<
           editorLanguage={this.state.editorLanguage}
           editorLineHeight={this.state.editorLineHeight}
           editorTheme={this.state.editorTheme}
+          fileName={this.state.fileName}
           showDropShadow={this.state.showWindowDropShadow}
           showEditorLineNumbers={this.state.showLineNumbers}
           titlebarTheme={this.state.titlebarTheme}
@@ -100,7 +109,7 @@ export default class App extends React.Component<
 
         <Spacer amount={spacerAmount} />
 
-        <Screenshot targetId="code-window-bg" />
+        <Screenshot targetId="code-window-bg" onFileNameChange={this.onFileNameChangeHandler} />
 
         <Spacer amount={spacerAmount} />
 

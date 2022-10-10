@@ -22,11 +22,24 @@ $gray: #222629;
   @include titlebar;
   padding: 0 0 0 0.5em;
   justify-content: flex-start !important;
+  position: relative;
 }
 
 .windows {
   @include titlebar;
   justify-content: flex-end;
+
+  .title {
+    left: 0;
+  }
+}
+
+.title {
+  position: absolute;
+  text-align: center;
+  z-index: 1;
+  font-size: 1.2em;
+  width: 100%;
 }
 
 .square {
