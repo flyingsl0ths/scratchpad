@@ -64,7 +64,6 @@ export default class App extends React.Component<
   }
 
   onFileNameChangeHandler(event: React.ChangeEvent<HTMLInputElement>): void {
-    console.debug(`File Name: ${event.target.value}`);
     this.setState({ fileName: event.target.value });
   }
 
