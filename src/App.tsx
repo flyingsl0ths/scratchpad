@@ -60,10 +60,9 @@ export default class App extends React.Component<
     };
 
     updateTheme(defaultTheme);
-    this.onFileNameChangeHandler = this.onFileNameChangeHandler.bind(this);
   }
 
-  onFileNameChangeHandler(event: React.ChangeEvent<HTMLInputElement>): void {
+  handleFileNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({ fileName: event.target.value });
   }
 
@@ -108,7 +107,7 @@ export default class App extends React.Component<
 
         <Spacer amount={spacerAmount} />
 
-        <Screenshot targetId="code-window-bg" onFileNameChange={this.onFileNameChangeHandler} />
+        <Screenshot targetId="code-window-bg" onFileNameChange={this.handleFileNameChange} />
 
         <Spacer amount={spacerAmount} />
 
