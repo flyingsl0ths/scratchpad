@@ -27,9 +27,10 @@ interface CodeWindowProps {
 export default function CodeWindow(props: CodeWindowProps): JSX.Element {
   const windowStyle = props.showDropShadow
     ? {
-      boxShadow: `${props.dropShadowOffsets.x}px ${props.dropShadowOffsets.y
+        boxShadow: `${props.dropShadowOffsets.x}px ${
+          props.dropShadowOffsets.y
         }px 8px 0 rgba(0,0,0,${props.dropShadowAlpha / 100})`
-    }
+      }
     : undefined;
 
   const windowBgStyle = {
