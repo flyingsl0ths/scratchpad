@@ -37,44 +37,6 @@ export default class Screenshot extends React.Component<
     this.targetId = props.targetId;
   }
 
-  handleScreenshot = () => {
-    const fileName = this.state.fileName;
-
-    if (fileName.length === 0) {
-      this.setState({ containsNoFileName: true });
-      return;
-    }
-
-    const fileExtension = capitalize(this.state.fileExtension);
-    const screenshotMethod = fromFileExtension(fileExtension);
-
-    if (!screenshotMethod) {
-      console.error(`Unknown download method: ${fileExtension}`);
-      return;
-    }
-
-    const target = document.getElementById(this.targetId);
-
-    if (!target) {
-      console.error("No screenshot target!");
-      return;
-    }
-
-    screenshotMethod(target).then(dataUrl => {
-      download(dataUrl, `${fileName}.${this.state.fileExtension}`);
-      this.setState({ containsNoFileName: false });
-    });
-  };
-
-  handleFileNameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ fileName: event.target.value });
-    this.props.onFileNameChange(event);
-  };
-
-  handleFileExtensionChanged = (extension: string) => {
-    this.setState({ fileExtension: extension });
-  };
-
   render() {
     const textField = this.state.containsNoFileName ? (
       <TextField
@@ -118,6 +80,46 @@ export default class Screenshot extends React.Component<
       </VBox>
     );
   }
+
+  private handleFileNameChanged = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    this.setState({ fileName: event.target.value });
+    this.props.onFileNameChange(event);
+  };
+
+  private handleFileExtensionChanged = (extension: string) => {
+    this.setState({ fileExtension: extension });
+  };
+
+  private handleScreenshot = () => {
+    const fileName = this.state.fileName;
+
+    if (fileName.length === 0) {
+      this.setState({ containsNoFileName: true });
+      return;
+    }
+
+    const fileExtension = capitalize(this.state.fileExtension);
+    const screenshotMethod = fromFileExtension(fileExtension);
+
+    if (!screenshotMethod) {
+      console.error(`Unknown download method: ${fileExtension}`);
+      return;
+    }
+
+    const target = document.getElementById(this.targetId);
+
+    if (!target) {
+      console.error("No screenshot target!");
+      return;
+    }
+
+    screenshotMethod(target).then(dataUrl => {
+      download(dataUrl, `${fileName}.${this.state.fileExtension}`);
+      this.setState({ containsNoFileName: false });
+    });
+  };
 }
 
 function capitalize(fileExtension: string): string {

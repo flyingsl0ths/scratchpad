@@ -59,12 +59,6 @@ export default class App extends React.Component<Empty, AppState> {
     updateTheme(defaultTheme);
   }
 
-  handleFileNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const cutOff = 20;
-    const fileName: string = event.target.value;
-    this.setState({ fileName: fileName.length <= cutOff ? fileName : fileName.slice(0, cutOff) });
-  }
-
   render() {
     const spacerAmount = "2em";
 
@@ -120,14 +114,24 @@ export default class App extends React.Component<Empty, AppState> {
     );
   }
 
-  handleLanguageChange = (newLanguage: string) => {
+  private handleFileNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const cutOff = 20;
+    const fileName: string = event.target.value;
+    this.setState({
+      fileName: fileName.length <= cutOff ? fileName : fileName.slice(0, cutOff)
+    });
+  };
+
+  private handleLanguageChange = (newLanguage: string): void => {
     newLanguage = newLanguage.toLowerCase();
     if (this.state.editorLanguage !== newLanguage) {
       this.setState({ editorLanguage: newLanguage });
     }
   };
 
-  handleThemeChange = (theme: string) => {
+  private handleThemeChange = (theme: string): void => {
     theme = theme.toLowerCase();
 
     const updatedTheme = theme.slice().replace(/\s/g, "-");
@@ -143,7 +147,10 @@ export default class App extends React.Component<Empty, AppState> {
     });
   };
 
-  handleChanges = (change: CodeWindowEvents, value: Primitive) => {
+  private handleCodeWindowChanges = (
+    change: CodeWindowEvents,
+    value: Primitive
+  ): void => {
     switch (change) {
       case CodeWindowEvents.THEME:
         this.handleThemeChange(value as string);
@@ -194,7 +201,7 @@ export default class App extends React.Component<Empty, AppState> {
   };
 }
 
-function updateTheme(theme: string) {
+function updateTheme(theme: string): void {
   document.head.querySelectorAll("link").forEach(link => {
     if (link.dataset.id === "editor-theme") {
       link.remove();
