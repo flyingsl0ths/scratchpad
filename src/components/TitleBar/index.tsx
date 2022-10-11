@@ -12,12 +12,12 @@ interface TitleBarProps {
 export default function TitleBar(props: TitleBarProps): JSX.Element {
   return (
     <HBox className={props.theme} centered={true}>
-      {computeThemeProps(props.theme, props.fileName)}
+      {buildTheme(props.theme, props.fileName)}
     </HBox>
   );
 }
 
-function computeThemeProps(theme: string, title?: string): JSX.Element[] {
+function buildTheme(theme: string, title?: string): JSX.Element[] {
   let result: JSX.Element[] = [];
 
   if (theme.includes("macos")) {
