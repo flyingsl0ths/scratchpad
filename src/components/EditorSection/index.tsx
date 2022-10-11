@@ -102,7 +102,7 @@ function EditorFontOptions(props: EditorFontOptionsProps): JSX.Element {
   return (
     <VBox className="pd-s" centered={false}>
       <Selection
-        defaultValue={1}
+        defaultValue={2}
         label="Select a font"
         values={FONTS}
         onSelectionChanged={props.handleEditorFontChanged}

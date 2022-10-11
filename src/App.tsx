@@ -35,7 +35,7 @@ export default class App extends React.Component<Empty, AppState> {
   constructor(props: Empty) {
     super(props);
 
-    const defaultTheme = THEMES[0];
+    const defaultTheme = THEMES[3];
 
     this.state = {
       editorExtraThemes: [],
