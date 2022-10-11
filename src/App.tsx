@@ -8,7 +8,7 @@ import ImageLink from "./components/ImageLink";
 import Screenshot from "./components/Screenshot";
 import { CodeWindowEvents } from "./CodeWindowEvents";
 import { THEMES } from "./EditorConstants";
-import { Primitive } from "./Utils";
+import { Empty, Primitive } from "./Utils";
 
 import "./scss/index.scss";
 
@@ -31,11 +31,8 @@ interface AppState {
   windowPaddingV: number;
 }
 
-export default class App extends React.Component<
-  Record<string, unknown>,
-  AppState
-> {
-  constructor(props: Record<string, unknown>) {
+export default class App extends React.Component<Empty, AppState> {
+  constructor(props: Empty) {
     super(props);
 
     const defaultTheme = THEMES[0];
