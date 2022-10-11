@@ -63,7 +63,9 @@ export default class App extends React.Component<
   }
 
   handleFileNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ fileName: event.target.value });
+    const cutOff = 20;
+    const fileName: string = event.target.value;
+    this.setState({ fileName: fileName.length <= cutOff ? fileName : fileName.slice(0, cutOff) });
   }
 
   render() {
