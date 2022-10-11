@@ -13,6 +13,7 @@ const FILE_EXTENSIONS = ["jpeg", "png", "svg"] as const;
 
 interface ScreenshotProps {
   targetId: string;
+  onFileNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface ScreenshotState {
@@ -65,8 +66,9 @@ export default class Screenshot extends React.Component<
     });
   };
 
-  handleFileNameChanged = (fileName: string) => {
-    this.setState({ fileName: fileName });
+  handleFileNameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ fileName: event.target.value });
+    this.props.onFileNameChange(event);
   };
 
   handleFileExtensionChanged = (extension: string) => {
@@ -79,13 +81,13 @@ export default class Screenshot extends React.Component<
         error
         label="File name"
         variant="outlined"
-        onChange={event => this.handleFileNameChanged(event.target.value)}
+        onChange={this.handleFileNameChanged}
       />
     ) : (
       <TextField
         label="File name"
         variant="outlined"
-        onChange={event => this.handleFileNameChanged(event.target.value)}
+        onChange={this.handleFileNameChanged}
       />
     );
 
