@@ -17,11 +17,11 @@ export const enum CodeWindowEvents {
   VERTICAL_PADDING
 }
 
-export function withEventChange<T>(
+export function withChange<T>(
   event: CodeWindowEvents,
   f: (event: CodeWindowEvents, value: T) => void
 ): (value: T) => void {
-  return val => f(event, val);
+  return value => f(event, value);
 }
 
 export type EventChange<T> = (value: T) => void;

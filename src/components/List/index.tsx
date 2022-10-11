@@ -8,15 +8,15 @@ import "./styles.scss";
 
 interface ListProps {
   children: JSX.Element[];
-  handleOnClick?: MouseEvent<HTMLElement>;
   id?: string;
+  onClick?: MouseEvent<HTMLElement>;
   orientation: string;
 }
 
 interface ButtonListProps {
-  handleOnClick?: MouseEvent<HTMLElement>;
   id?: string;
   labels: readonly string[];
+  onClick?: MouseEvent<HTMLElement>;
   orientation: string;
   selected: string;
 }
@@ -24,18 +24,18 @@ interface ButtonListProps {
 export function List(props: ListProps): JSX.Element {
   return props.orientation === "v" ? (
     <VBox
-      handleOnClick={props.handleOnClick}
-      id={props.id}
+      centered={false}
       className={`${props.orientation}-list`}
-      centered={false}>
+      id={props.id}
+      OnClick={props.onClick}>
       {props.children}
     </VBox>
   ) : (
     <HBox
-      handleOnClick={props.handleOnClick}
-      id={props.id}
+      centered={false}
       className={`${props.orientation}-list`}
-      centered={false}>
+      id={props.id}
+      OnClick={props.onClick}>
       {props.children}
     </HBox>
   );
@@ -61,7 +61,7 @@ export function ButtonList(props: ButtonListProps): JSX.Element {
   ));
 
   return (
-    <List handleOnClick={props.handleOnClick} orientation={props.orientation}>
+    <List onClick={props.onClick} orientation={props.orientation}>
       {buttons}
     </List>
   );

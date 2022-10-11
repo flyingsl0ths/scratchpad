@@ -6,10 +6,10 @@ import Spacer from "../Spacer";
 
 interface LabeledSliderProps {
   defaultValue: number;
-  handleChange: (value: number) => void;
   label: string;
   max: number;
   min: number;
+  onChange: (value: number) => void;
   step: number;
 }
 
@@ -18,23 +18,21 @@ export default function LabeledSlider(props: LabeledSliderProps): JSX.Element {
     <VBox centered={false}>
       <h4 className="fw-n">{props.label}</h4>
       <Spacer amount="0.5em" />
-      {props.handleChange ? (
+      {props.onChange ? (
         <Slider
-          step={props.step}
-          min={props.min}
-          max={props.max}
           defaultValue={props.defaultValue}
-          aria-label="Default"
+          max={props.max}
+          min={props.min}
+          onChange={(_, value) => props.onChange(value as number)}
+          step={props.step}
           valueLabelDisplay="auto"
-          onChange={(_, value) => props.handleChange(value as number)}
         />
       ) : (
         <Slider
-          step={props.step}
-          min={props.min}
-          max={props.max}
           defaultValue={props.defaultValue}
-          aria-label="Default"
+          max={props.max}
+          min={props.min}
+          step={props.step}
           valueLabelDisplay="auto"
         />
       )}

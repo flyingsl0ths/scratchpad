@@ -11,15 +11,15 @@ import LanguageTab from "../LanguageTab";
 import SceneTab from "../SceneTab";
 
 import {
+  CodeWindowChange,
   CodeWindowEvents,
-  withEventChange,
-  CodeWindowChange
+  withChange
 } from "../../CodeWindowEvents";
 
 import "./styles.scss";
 
 interface SettingsTabsProps {
-  handleCodeWindowChanges: CodeWindowChange;
+  onCodeWindowChange: CodeWindowChange;
   selectedLanguage: string;
   selectedTheme: string;
   windowBgColor: string;
@@ -33,28 +33,28 @@ function switchTab(
     case 0:
       return (
         <ThemeTab
-          selectedTheme={props.selectedTheme}
-          handleThemeChange={withEventChange(
+          onThemeChange={withChange(
             CodeWindowEvents.THEME,
-            props.handleCodeWindowChanges
+            props.onCodeWindowChange
           )}
+          selectedTheme={props.selectedTheme}
         />
       );
     case 1:
       return (
         <LanguageTab
-          selectedLanguage={props.selectedLanguage}
-          handleLanguageChange={withEventChange(
+          onEditorLanguageChange={withChange(
             CodeWindowEvents.LANGUAGE,
-            props.handleCodeWindowChanges
+            props.onCodeWindowChange
           )}
+          selectedLanguage={props.selectedLanguage}
         />
       );
     case 2:
       return (
         <SceneTab
+          onSceneChange={props.onCodeWindowChange}
           windowBgColor={props.windowBgColor}
-          handleSceneChanges={props.handleCodeWindowChanges}
         />
       );
     default:
@@ -76,11 +76,7 @@ export default function SettingsTabs(props: SettingsTabsProps): JSX.Element {
 
   return newTab ? (
     <VBox id="settings-tab" centered={false}>
-      <Tabs
-        value={value}
-        variant="fullWidth"
-        onChange={handleChange}
-        aria-label="icon label tabs example">
+      <Tabs onChange={handleChange} value={value} variant="fullWidth">
         <Tab icon={<PaletteIcon />} label="Theme" />
         <Tab icon={<CodeIcon />} label="Language" />
         <Tab icon={<WindowIcon />} label="Scene" />
@@ -89,11 +85,7 @@ export default function SettingsTabs(props: SettingsTabsProps): JSX.Element {
     </VBox>
   ) : (
     <VBox id="settings-tab" centered={false}>
-      <Tabs
-        value={value}
-        variant="fullWidth"
-        onChange={handleChange}
-        aria-label="icon label tabs example">
+      <Tabs onChange={handleChange} value={value} variant="fullWidth">
         <Tab icon={<PaletteIcon />} label="Theme" />
         <Tab icon={<CodeIcon />} label="Language" />
         <Tab icon={<WindowIcon />} label="Scene" />

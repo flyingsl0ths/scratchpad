@@ -8,7 +8,7 @@ import LabeledIcon from "../LabledIcon";
 import { ButtonList } from "../List";
 
 interface ThemeTabProps {
-  handleThemeChange: (theme: string) => void;
+  onThemeChange: (theme: string) => void;
   selectedTheme: string;
 }
 
@@ -20,12 +20,12 @@ export default function ThemeTab(props: ThemeTabProps): JSX.Element {
       </LabeledIcon>
       <Spacer amount="0.5em" />
       <ButtonList
+        labels={THEMES}
+        onClick={event =>
+          props.onThemeChange((event.target as HTMLElement).innerText)
+        }
         orientation="v"
         selected={props.selectedTheme}
-        handleOnClick={event =>
-          props.handleThemeChange((event.target as HTMLElement).innerText)
-        }
-        labels={THEMES}
       />
     </VBox>
   );

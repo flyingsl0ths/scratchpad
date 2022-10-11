@@ -68,22 +68,22 @@ export default class App extends React.Component<Empty, AppState> {
           <h1 id="header">Scratchpad</h1>
           <ImageLink
             id="project-link"
-            url="https://github.com/flyingsl0ths/scratchpad"
-            image="/github.png"
             imageDescription="Github logo"
+            image="/github.png"
+            url="https://github.com/flyingsl0ths/scratchpad"
           />
         </HBox>
 
         <Spacer amount={spacerAmount} />
 
         <CodeWindow
+          dropShadowAlpha={this.state.windowDropShadowAlpha}
           dropShadowOffsets={{
             x: this.state.windowDropShadowOffsetX,
             y: this.state.windowDropShadowOffsetY
           }}
-          dropShadowAlpha={this.state.windowDropShadowAlpha}
-          editorFont={this.state.editorFont}
           editorFontSize={this.state.editorFontSize}
+          editorFont={this.state.editorFont}
           editorLanguage={this.state.editorLanguage}
           editorLineHeight={this.state.editorLineHeight}
           editorTheme={this.state.editorTheme}
@@ -100,14 +100,17 @@ export default class App extends React.Component<Empty, AppState> {
 
         <Spacer amount={spacerAmount} />
 
-        <Screenshot targetId="code-window-bg" onFileNameChange={this.handleFileNameChange} />
+        <Screenshot
+          onFileNameChange={this.handleFileNameChange}
+          targetId="code-window-bg"
+        />
 
         <Spacer amount={spacerAmount} />
 
         <SettingsTabs
+          onCodeWindowChange={this.handleCodeWindowChanges}
           selectedLanguage={this.state.editorLanguage}
           selectedTheme={this.state.editorTheme}
-          handleCodeWindowChanges={this.handleChanges}
           windowBgColor={this.state.windowBgColor}
         />
       </VBox>

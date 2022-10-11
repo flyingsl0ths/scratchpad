@@ -8,7 +8,7 @@ import Spacer from "../Spacer";
 import { LANGUAGES } from "../../EditorConstants";
 
 interface LanguageTabProps {
-  handleLanguageChange: (language: string) => void;
+  onEditorLanguageChange: (language: string) => void;
   selectedLanguage: string;
 }
 
@@ -20,12 +20,12 @@ export default function LanguageTab(props: LanguageTabProps): JSX.Element {
       </LabeledIcon>
       <Spacer amount="0.5em" />
       <ButtonList
+        labels={LANGUAGES}
+        onClick={event =>
+          props.onEditorLanguageChange((event.target as HTMLElement).innerText)
+        }
         orientation="v"
         selected={props.selectedLanguage}
-        handleOnClick={event =>
-          props.handleLanguageChange((event.target as HTMLElement).innerText)
-        }
-        labels={LANGUAGES}
       />
     </VBox>
   );

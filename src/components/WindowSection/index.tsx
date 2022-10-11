@@ -13,97 +13,97 @@ import LabeledSlider from "../LabeledSlider";
 import TitleBar from "../TitleBar";
 import Spacer from "../Spacer";
 import {
+  CodeWindowChange,
   CodeWindowEvents,
-  withEventChange,
   EventChange,
-  CodeWindowChange
+  withChange
 } from "../../CodeWindowEvents";
 
 interface WindowSectionProps {
-  handleSceneChanges: CodeWindowChange;
+  onSceneChange: CodeWindowChange;
   windowBgColor: string;
 }
 
 interface TitleBarOptionsProps {
-  handleWindowTitleBarChanged: EventChange<string>;
+  onWindowTitleBarChange: EventChange<string>;
 }
 
 interface WindowPaddingOptionsProps {
-  handleHPaddingChanged: EventChange<number>;
-  handleVPaddingChanged: EventChange<number>;
+  onHPaddingChange: EventChange<number>;
+  onVPaddingChange: EventChange<number>;
 }
 
 interface WindowBackdropOptionsProps {
-  handleWindowShadowXChanged: EventChange<number>;
-  handleWindowShadowYChanged: EventChange<number>;
-  handleWindowShadowAlphaChanged: EventChange<number>;
-  handleWindowShadowToggleChanged: EventChange<boolean>;
-  handleWindowBgColorChanged: EventChange<string>;
+  onWindowBgColorChange: EventChange<string>;
+  onWindowShadowAlphaChange: EventChange<number>;
+  onWindowShadowToggleChange: EventChange<boolean>;
+  onWindowShadowXChange: EventChange<number>;
+  onWindowShadowYChange: EventChange<number>;
   windowBgColor: string;
 }
 
 interface TitleBarThemeContainerProps {
+  onnClick: EventChange<string>;
   theme: string;
-  handleOnClick: EventChange<string>;
 }
 
 interface ColorPickerProps {
   color: string;
-  handleColorChanged: EventChange<string>;
+  onColorChange: EventChange<string>;
 }
 
 export default function WindowSection(props: WindowSectionProps): JSX.Element {
   return (
     <Section title="Window" icon={<WebAssetIcon />}>
       <SettingAccordion
-        title="Window Controls"
-        subTitle="Adjust the window's titlebar style">
+        subTitle="Adjust the window's titlebar style"
+        title="Window Controls">
         <TitleBarOptions
-          handleWindowTitleBarChanged={withEventChange(
+          onWindowTitleBarChange={withChange(
             CodeWindowEvents.TITLEBAR,
-            props.handleSceneChanges
+            props.onSceneChange
           )}
         />
       </SettingAccordion>
 
       <SettingAccordion
-        title="Window Padding"
-        subTitle="Adjust the window's padding">
+        subTitle="Adjust the window's padding"
+        title="Window Padding">
         <WindowPaddingOptions
-          handleHPaddingChanged={withEventChange(
+          onHPaddingChange={withChange(
             CodeWindowEvents.HORIZONTAL_PADDING,
-            props.handleSceneChanges
+            props.onSceneChange
           )}
-          handleVPaddingChanged={withEventChange(
+          onVPaddingChange={withChange(
             CodeWindowEvents.VERTICAL_PADDING,
-            props.handleSceneChanges
+            props.onSceneChange
           )}
         />
       </SettingAccordion>
 
       <SettingAccordion
-        title="Window Backdrop"
-        subTitle="Adjust the window's backdrop">
+        subTitle="Adjust the window's backdrop"
+        title="Window Backdrop">
         <WindowBackdropOptions
-          handleWindowShadowXChanged={withEventChange(
-            CodeWindowEvents.SHADOW_OFFSET_X,
-            props.handleSceneChanges
-          )}
-          handleWindowShadowYChanged={withEventChange(
-            CodeWindowEvents.SHADOW_OFFSET_Y,
-            props.handleSceneChanges
-          )}
-          handleWindowShadowAlphaChanged={withEventChange(
-            CodeWindowEvents.SHADOW_ALPHA,
-            props.handleSceneChanges
-          )}
-          handleWindowShadowToggleChanged={withEventChange(
-            CodeWindowEvents.SHADOW_TOGGLED,
-            props.handleSceneChanges
-          )}
-          handleWindowBgColorChanged={withEventChange(
+          onWindowBgColorChange={withChange(
             CodeWindowEvents.BG_COLOR,
-            props.handleSceneChanges
+            props.onSceneChange
+          )}
+          onWindowShadowAlphaChange={withChange(
+            CodeWindowEvents.SHADOW_ALPHA,
+            props.onSceneChange
+          )}
+          onWindowShadowToggleChange={withChange(
+            CodeWindowEvents.SHADOW_TOGGLED,
+            props.onSceneChange
+          )}
+          onWindowShadowXChange={withChange(
+            CodeWindowEvents.SHADOW_OFFSET_X,
+            props.onSceneChange
+          )}
+          onWindowShadowYChange={withChange(
+            CodeWindowEvents.SHADOW_OFFSET_Y,
+            props.onSceneChange
           )}
           windowBgColor={props.windowBgColor}
         />
@@ -117,12 +117,12 @@ function TitleBarOptions(props: TitleBarOptionsProps): JSX.Element {
     <VBox centered={false}>
       <List orientation="h">
         <TitleBarThemeContainer
-          handleOnClick={props.handleWindowTitleBarChanged}
+          onnClick={props.onWindowTitleBarChange}
           theme="macos"
         />
 
         <TitleBarThemeContainer
-          handleOnClick={props.handleWindowTitleBarChanged}
+          onnClick={props.onWindowTitleBarChange}
           theme="windows"
         />
       </List>
@@ -134,9 +134,7 @@ function TitleBarThemeContainer(
   props: TitleBarThemeContainerProps
 ): JSX.Element {
   return (
-    <div
-      onClick={() => props.handleOnClick(props.theme)}
-      className="rounded-border">
+    <div onClick={() => props.onnClick(props.theme)} className="rounded-border">
       <TitleBar theme={props.theme} />
     </div>
   );
@@ -146,21 +144,21 @@ function WindowPaddingOptions(props: WindowPaddingOptionsProps): JSX.Element {
   return (
     <VBox className="pd-s" centered={false}>
       <LabeledSlider
-        label="Horizontal Padding"
-        min={1}
-        max={20}
-        step={1}
         defaultValue={5}
-        handleChange={props.handleHPaddingChanged}
+        label="Horizontal Padding"
+        max={20}
+        min={1}
+        onChange={props.onHPaddingChange}
+        step={1}
       />
       <Spacer amount="1em" />
       <LabeledSlider
-        label="Vertical Padding"
-        min={1}
-        max={20}
-        step={1}
         defaultValue={5}
-        handleChange={props.handleVPaddingChanged}
+        label="Vertical Padding"
+        max={20}
+        min={1}
+        onChange={props.onVPaddingChange}
+        step={1}
       />
     </VBox>
   );
@@ -175,7 +173,7 @@ function WindowBackdropOptions(props: WindowBackdropOptionsProps): JSX.Element {
           <Checkbox
             defaultChecked={true}
             onChange={event =>
-              props.handleWindowShadowToggleChanged(event.target.checked)
+              props.onWindowShadowToggleChange(event.target.checked)
             }
           />
         }
@@ -186,37 +184,37 @@ function WindowBackdropOptions(props: WindowBackdropOptionsProps): JSX.Element {
 
       <ColorPicker
         color={props.windowBgColor}
-        handleColorChanged={props.handleWindowBgColorChanged}
+        onColorChange={props.onWindowBgColorChange}
       />
 
       <Spacer amount={spacerAmount} />
 
       <LabeledSlider
-        label="Horizontal offset"
-        min={1}
-        max={100}
-        step={1}
         defaultValue={1}
-        handleChange={props.handleWindowShadowXChanged}
+        label="Horizontal offset"
+        max={100}
+        min={1}
+        onChange={props.onWindowShadowXChange}
+        step={1}
       />
 
       <Spacer amount={spacerAmount} />
       <LabeledSlider
-        label="Vertical offset"
-        min={1}
-        max={100}
-        step={1}
         defaultValue={2}
-        handleChange={props.handleWindowShadowYChanged}
+        label="Vertical offset"
+        max={100}
+        min={1}
+        onChange={props.onWindowShadowYChange}
+        step={1}
       />
       <Spacer amount={spacerAmount} />
       <LabeledSlider
-        label="Transparency"
-        min={1}
-        max={100}
-        step={1}
         defaultValue={2}
-        handleChange={props.handleWindowShadowAlphaChanged}
+        label="Transparency"
+        max={100}
+        min={1}
+        onChange={props.onWindowShadowAlphaChange}
+        step={1}
       />
     </VBox>
   );
@@ -229,19 +227,19 @@ function ColorPicker(props: ColorPickerProps): JSX.Element {
       <h4 className="fw-n">{`Background color`}</h4>
       <Spacer amount={spacerAmount} />
       <HexColorPicker
-        style={{ width: "100%" }}
         color={props.color}
-        onChange={props.handleColorChanged}
+        onChange={props.onColorChange}
+        style={{ width: "100%" }}
       />
       <Spacer amount={spacerAmount} />
       <HBox centered={false}>
         <TextField
-          size="medium"
           fullWidth={false}
           label="Hex color"
+          onChange={event => props.onColorChange(event.target.value)}
+          size="medium"
           value={props.color}
           variant="outlined"
-          onChange={event => props.handleColorChanged(event.target.value)}
         />
         <Spacer amount="0.2em" />
       </HBox>

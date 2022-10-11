@@ -9,7 +9,7 @@ import "./styles.scss";
 interface SelectionProps {
   defaultValue: number;
   label: string;
-  onSelectionChanged: (value: string) => void;
+  onSelectionChange: (value: string) => void;
   values: readonly string[];
 }
 
@@ -27,7 +27,7 @@ export default function Selection(props: SelectionProps): JSX.Element {
 
     setValue(newValue);
 
-    props.onSelectionChanged(props.values[Number(newValue) - 1]);
+    props.onSelectionChange(props.values[Number(newValue) - 1]);
   };
 
   return (

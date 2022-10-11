@@ -10,7 +10,7 @@ import WindowSection from "../WindowSection";
 import { CodeWindowChange } from "../../CodeWindowEvents";
 
 interface SceneTabProps {
-  handleSceneChanges: CodeWindowChange;
+  onSceneChange: CodeWindowChange;
   windowBgColor: string;
 }
 
@@ -24,9 +24,9 @@ export default function SceneTab(props: SceneTabProps): JSX.Element {
       <List orientation="v">
         <WindowSection
           windowBgColor={props.windowBgColor}
-          handleSceneChanges={props.handleSceneChanges}
+          onSceneChange={props.onSceneChange}
         />
-        <EditorSection handleEditorChanges={props.handleSceneChanges} />
+        <EditorSection onEditorSettingsChange={props.onSceneChange} />
       </List>
     </VBox>
   );

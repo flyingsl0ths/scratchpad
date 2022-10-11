@@ -4,10 +4,10 @@ import { Checkbox } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 import {
+  CodeWindowChange,
   CodeWindowEvents,
   EventChange,
-  withEventChange,
-  CodeWindowChange
+  withChange
 } from "../../CodeWindowEvents";
 import { FONTS } from "../../EditorConstants";
 import Section from "../Section";
@@ -18,48 +18,48 @@ import Spacer from "../Spacer";
 import LabeledSlider from "../LabeledSlider";
 
 interface EditorSectionProps {
-  handleEditorChanges: CodeWindowChange;
+  onEditorSettingsChange: CodeWindowChange;
 }
 
 interface EditorLinesOptionsProps {
-  handleEditorLinesChanged: EventChange<number>;
-  handleEditorLinesToggled: EventChange<boolean>;
+  onEditorLineHeightChange: EventChange<number>;
+  onEditorLinesToggle: EventChange<boolean>;
 }
 
 interface EditorFontOptionsProps {
-  handleEditorFontChanged: EventChange<string>;
-  handleEditorFontSizeChanged: EventChange<number>;
+  onEditorFontChange: EventChange<string>;
+  onEditorFontSizeChange: EventChange<number>;
 }
 
 export default function EditorSection(props: EditorSectionProps): JSX.Element {
   return (
     <Section title="Editor" icon={<EditorIcon />}>
       <SettingAccordion
-        title="Font"
-        subTitle="Adjust the editor's font settings">
+        subTitle="Adjust the editor's font settings"
+        title="Font">
         <EditorFontOptions
-          handleEditorFontChanged={withEventChange(
+          onEditorFontChange={withChange(
             CodeWindowEvents.EDITOR_FONT_CHANGED,
-            props.handleEditorChanges
+            props.onEditorSettingsChange
           )}
-          handleEditorFontSizeChanged={withEventChange(
+          onEditorFontSizeChange={withChange(
             CodeWindowEvents.EDITOR_FONT_SIZE_INCREASED,
-            props.handleEditorChanges
+            props.onEditorSettingsChange
           )}
         />
       </SettingAccordion>
 
       <SettingAccordion
-        title="Lines"
-        subTitle="Adjust the editor's line settings">
+        subTitle="Adjust the editor's line settings"
+        title="Lines">
         <EditorLinesOptions
-          handleEditorLinesChanged={withEventChange(
+          onEditorLineHeightChange={withChange(
             CodeWindowEvents.EDITOR_LINES_INCREASED,
-            props.handleEditorChanges
+            props.onEditorSettingsChange
           )}
-          handleEditorLinesToggled={withEventChange(
+          onEditorLinesToggle={withChange(
             CodeWindowEvents.EDITOR_LINES_TOGGLED,
-            props.handleEditorChanges
+            props.onEditorSettingsChange
           )}
         />
       </SettingAccordion>
@@ -74,9 +74,7 @@ function EditorLinesOptions(props: EditorLinesOptionsProps): JSX.Element {
         control={
           <Checkbox
             defaultChecked={true}
-            onChange={event =>
-              props.handleEditorLinesToggled(event.target.checked)
-            }
+            onChange={event => props.onEditorLinesToggle(event.target.checked)}
           />
         }
         label="Show line numbers"
@@ -85,12 +83,12 @@ function EditorLinesOptions(props: EditorLinesOptionsProps): JSX.Element {
       <Spacer amount="1em" />
 
       <LabeledSlider
-        label="Line height"
-        min={1}
-        max={100}
-        step={0.1}
         defaultValue={1.2}
-        handleChange={props.handleEditorLinesChanged}
+        label="Line height"
+        max={100}
+        min={1}
+        onChange={props.onEditorLineHeightChange}
+        step={0.1}
       />
     </VBox>
   );
@@ -104,19 +102,19 @@ function EditorFontOptions(props: EditorFontOptionsProps): JSX.Element {
       <Selection
         defaultValue={2}
         label="Select a font"
+        onSelectionChange={props.onEditorFontChange}
         values={FONTS}
-        onSelectionChanged={props.handleEditorFontChanged}
       />
 
       <Spacer amount={spacerAmount} />
 
       <LabeledSlider
-        label="Font size"
-        min={1}
-        max={100}
-        step={1}
         defaultValue={21}
-        handleChange={props.handleEditorFontSizeChanged}
+        label="Font size"
+        max={100}
+        min={1}
+        onChange={props.onEditorFontSizeChange}
+        step={1}
       />
     </VBox>
   );

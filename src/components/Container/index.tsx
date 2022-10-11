@@ -8,8 +8,8 @@ interface BoxProps {
   centered: boolean;
   children: JSX.Element | readonly JSX.Element[];
   className?: string;
-  handleOnClick?: MouseEvent<HTMLElement>;
   id?: string;
+  OnClick?: MouseEvent<HTMLElement>;
   style?: React.CSSProperties;
 }
 
@@ -33,22 +33,18 @@ function Box(props: BoxProps, orientation: Orientation): JSX.Element {
     filters.push(props.className);
   }
 
-  return props.handleOnClick ? (
+  return props.OnClick ? (
     <div
-      onClick={event =>
-        forwardEvent(
-          event,
-          props.handleOnClick as MouseEvent<HTMLElement>,
-          filters
-        )
-      }
+      className={className}
       id={props.id}
-      style={props.style}
-      className={className}>
+      onClick={event =>
+        forwardEvent(event, props.OnClick as MouseEvent<HTMLElement>, filters)
+      }
+      style={props.style}>
       {props.children}
     </div>
   ) : (
-    <div id={props.id} style={props.style} className={className}>
+    <div className={className} id={props.id} style={props.style}>
       {props.children}
     </div>
   );

@@ -12,8 +12,8 @@ import Selection from "../Selection";
 const FILE_EXTENSIONS = ["jpeg", "png", "svg"] as const;
 
 interface ScreenshotProps {
-  targetId: string;
   onFileNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  targetId: string;
 }
 
 interface ScreenshotState {
@@ -29,11 +29,13 @@ export default class Screenshot extends React.Component<
   private targetId: string;
   constructor(props: ScreenshotProps) {
     super(props);
+
     this.state = {
       containsNoFileName: false,
       fileExtension: FILE_EXTENSIONS[0],
       fileName: ""
     };
+
     this.targetId = props.targetId;
   }
 
@@ -42,14 +44,14 @@ export default class Screenshot extends React.Component<
       <TextField
         error
         label="File name"
-        variant="outlined"
         onChange={this.handleFileNameChanged}
+        variant="outlined"
       />
     ) : (
       <TextField
         label="File name"
-        variant="outlined"
         onChange={this.handleFileNameChanged}
+        variant="outlined"
       />
     );
 
@@ -63,18 +65,18 @@ export default class Screenshot extends React.Component<
           <Selection
             defaultValue={1}
             label="Export as"
+            onSelectionChange={this.handleFileExtensionChanged}
             values={FILE_EXTENSIONS}
-            onSelectionChanged={this.handleFileExtensionChanged}
           />
         </HBox>
 
         <Spacer amount="1em" />
 
         <Button
-          variant="contained"
-          size="medium"
           onClick={this.handleScreenshot}
-          startIcon={<ScreenshotMonitor />}>
+          size="medium"
+          startIcon={<ScreenshotMonitor />}
+          variant="contained">
           Screenshot
         </Button>
       </VBox>
