@@ -61,15 +61,11 @@ function forwardEvent(
 ) {
   const target = event.target as HTMLElement;
 
-  let isSelf = false;
-
   for (const filter of filters) {
     if (target.classList.contains(filter)) {
-      isSelf = true;
+      return;
     }
   }
 
-  if (!isSelf) {
-    handler(event);
-  }
+  handler(event);
 }
